@@ -1,222 +1,146 @@
-(kicad_sch (version 20211123) (generator eeschema)
-
-  (uuid 31567b71-44a6-4f20-978f-6760a129c7a5)
-
-  (paper "A4")
-
-  (title_block
-    (title "Nodo de temperatura, humedad y presión")
-    (date "2025-02-14")
-    (rev "v2.0")
-    (company "Servicio Meteorológico Nacional (SMN)")
-  )
-
-  (lib_symbols
-  )
-
-
-  (sheet (at 56.134 55.245) (size 53.721 27.305) (fields_autoplaced)
-    (stroke (width 0.1524) (type solid) (color 0 0 0 0))
-    (fill (color 0 0 0 0.0000))
-    (uuid 38d5e957-879e-408c-8450-ff788dcea95c)
-    (property "Sheet name" "shield_base" (id 0) (at 56.134 54.5334 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom))
-    )
-    (property "Sheet file" "shield_base.kicad_sch" (id 1) (at 56.134 83.1346 0)
-      (effects (font (size 1.27 1.27)) (justify left top))
-    )
-  )
-
-  (sheet (at 144.526 72.771) (size 42.799 21.971) (fields_autoplaced)
-    (stroke (width 0.1524) (type solid) (color 0 0 0 0))
-    (fill (color 0 0 0 0.0000))
-    (uuid a5c8404b-c871-4957-8f0c-905335996a80)
-    (property "Sheet name" "shield_sensor" (id 0) (at 144.526 72.0594 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom))
-    )
-    (property "Sheet file" "shield_sensor.kicad_sch" (id 1) (at 144.526 95.3266 0)
-      (effects (font (size 1.27 1.27)) (justify left top))
-    )
-  )
-
-  (sheet (at 143.383 38.735) (size 42.545 24.13) (fields_autoplaced)
-    (stroke (width 0.1524) (type solid) (color 0 0 0 0))
-    (fill (color 0 0 0 0.0000))
-    (uuid ffb5ec71-6abc-4f99-a135-428820e16084)
-    (property "Sheet name" "shield_leds_status" (id 0) (at 143.383 38.0234 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom))
-    )
-    (property "Sheet file" "shield_leds_status.kicad_sch" (id 1) (at 143.383 63.4496 0)
-      (effects (font (size 1.27 1.27)) (justify left top))
-    )
-  )
-
-  (sheet_instances
-    (path "/" (page "1"))
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c" (page "2"))
-    (path "/a5c8404b-c871-4957-8f0c-905335996a80" (page "3"))
-    (path "/ffb5ec71-6abc-4f99-a135-428820e16084" (page "5"))
-  )
-
-  (symbol_instances
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/adf08207-7b53-4fe7-a77a-ac881b92f893"
-      (reference "#FLG0101") (unit 1) (value "PWR_FLAG") (footprint "")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/27493f9a-2670-4692-b19b-b494cd56d14f"
-      (reference "#FLG0102") (unit 1) (value "PWR_FLAG") (footprint "")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/b3bfa3d1-91e5-46e4-9105-c0cff2d08016"
-      (reference "#FLG0103") (unit 1) (value "PWR_FLAG") (footprint "")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/2c6fefe1-d0c6-412d-9ff2-ed37b60dcd2b"
-      (reference "#PWR01") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/a22f6159-4e55-48de-a505-baa4c90590bd"
-      (reference "#PWR02") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/a5c8404b-c871-4957-8f0c-905335996a80/d8ce9b80-4025-48dc-973e-faf35c924179"
-      (reference "#PWR03") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/a5c8404b-c871-4957-8f0c-905335996a80/b057ff1d-33f0-43b3-b725-1bdb06265936"
-      (reference "#PWR04") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/8e4b3846-3f98-409f-a5d4-2a35dbb4232c"
-      (reference "#PWR05") (unit 1) (value "+5V") (footprint "")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/e8fbce6e-e83f-4719-9779-f370db9207c2"
-      (reference "#PWR07") (unit 1) (value "+5V") (footprint "")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/1b781a80-cd64-4981-89c7-3604b763ac43"
-      (reference "#PWR08") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/789a82e7-64b8-4129-a5e9-e321f08b912d"
-      (reference "#PWR09") (unit 1) (value "+5V") (footprint "")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/64808dfe-6999-4168-b327-a1244537b002"
-      (reference "#PWR010") (unit 1) (value "+5V") (footprint "")
-    )
-    (path "/ffb5ec71-6abc-4f99-a135-428820e16084/b9704f36-61d8-4a4b-94d8-cbeb98fdf5f4"
-      (reference "#PWR012") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/b8065708-83d8-4d7d-b8a1-ee9d5c26f200"
-      (reference "#PWR0101") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/6021a359-35e2-4457-bc87-aa0282066c71"
-      (reference "#PWR0102") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/7821e3ee-3b4c-442e-9d59-fa86da328891"
-      (reference "#PWR0103") (unit 1) (value "+5V") (footprint "")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/20361811-a773-4fcb-b4a2-7d422af523b6"
-      (reference "#PWR0104") (unit 1) (value "+5V") (footprint "")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/ede63a20-5ee3-4e41-b424-60af8f100d7f"
-      (reference "#PWR0105") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/ffb5ec71-6abc-4f99-a135-428820e16084/09653ec6-d173-4ed9-88c3-202d64e14663"
-      (reference "#PWR0106") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/ffb5ec71-6abc-4f99-a135-428820e16084/6e77c7e0-fde9-43f7-b9e1-53e6c3beff86"
-      (reference "#PWR0107") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/55b8d107-2c38-44fe-a21f-6b1286eb8762"
-      (reference "#PWR0108") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/e9efa557-597f-411f-a77f-d45aee4f2234"
-      (reference "#PWR0109") (unit 1) (value "+5V") (footprint "")
-    )
-    (path "/ffb5ec71-6abc-4f99-a135-428820e16084/e85e3e04-796f-4861-95b8-8ba38981c7a2"
-      (reference "#PWR0110") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/116328cb-c2a3-4685-a1c6-2a065c4ea792"
-      (reference "#PWR0111") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/a5c8404b-c871-4957-8f0c-905335996a80/d2387bc4-d861-4e99-8b22-3ebe146d5792"
-      (reference "#PWR0115") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/a5c8404b-c871-4957-8f0c-905335996a80/d0eb270d-6e81-4263-8467-0800c99ba716"
-      (reference "#PWR0117") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/a5c8404b-c871-4957-8f0c-905335996a80/29c8767e-0741-4b5e-858a-3d192450ef88"
-      (reference "#PWR0122") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/ffb5ec71-6abc-4f99-a135-428820e16084/662abcce-bbd9-4114-8277-89423aeb605c"
-      (reference "D1") (unit 1) (value "LED_YELLOW") (footprint "LED_THT:LED_D3.0mm")
-    )
-    (path "/ffb5ec71-6abc-4f99-a135-428820e16084/45bf1d69-8fa9-47ea-bde4-f70efc4f8519"
-      (reference "D2") (unit 1) (value "LED_Dual_AKA") (footprint "LED_THT:LED_D3.0mm-3")
-    )
-    (path "/ffb5ec71-6abc-4f99-a135-428820e16084/ceb7be08-7951-4e2e-8e43-16f9b9e1eb2a"
-      (reference "D3") (unit 1) (value "LED_GREEN") (footprint "LED_THT:LED_D3.0mm")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/2cafdb2a-6c0b-4679-aa8a-7cf484ebfb9c"
-      (reference "J1") (unit 1) (value "Molex_MainBoard_DHT22") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/4fad404b-ca8d-44c8-800a-e54710f95b38"
-      (reference "J2") (unit 1) (value "Molex_MainBoard_BMP280") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/e0c1a213-3498-48c7-bf04-f6b903416d58"
-      (reference "J3") (unit 1) (value "Jack-DC") (footprint "Connector_BarrelJack:BarrelJack_GCT_DCJ200-10-A_Horizontal")
-    )
-    (path "/a5c8404b-c871-4957-8f0c-905335996a80/c7e29e51-2ca6-40a0-a16d-3293273682e4"
-      (reference "J4") (unit 1) (value "Molex_Sensor_BMP280") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal")
-    )
-    (path "/a5c8404b-c871-4957-8f0c-905335996a80/ebd8eb85-f9c6-4deb-bfb2-43cf7cf3f801"
-      (reference "J5") (unit 1) (value "Molex_Sensor_DHT22") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/0a114113-3a3f-41c9-af07-d456b6a1b325"
-      (reference "J6") (unit 1) (value "Molex_MainBoard_Led_Status") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Horizontal")
-    )
-    (path "/ffb5ec71-6abc-4f99-a135-428820e16084/de59905b-bd0f-49b3-85dc-45e672749914"
-      (reference "J7") (unit 1) (value "Molex_Led_Status") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Horizontal")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/5026c4fe-1481-4d61-8e15-d58104ce88c4"
-      (reference "Q1") (unit 1) (value "Q_NPN_BEC") (footprint "Package_TO_SOT_SMD:SOT-23")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/2ee57aa5-9c3a-42d9-a3c2-62cb1588c32e"
-      (reference "Q2") (unit 1) (value "Q_NPN_BEC") (footprint "Package_TO_SOT_SMD:SOT-23")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/200dbd5a-2df6-4e6e-a72d-3fbd162cae77"
-      (reference "Q3") (unit 1) (value "Q_NPN_BEC") (footprint "Package_TO_SOT_SMD:SOT-23")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/1d4bc24a-24e8-4045-9be9-b30c2bb239eb"
-      (reference "Q4") (unit 1) (value "Q_NPN_BEC") (footprint "Package_TO_SOT_SMD:SOT-23")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/9221c151-5812-47d8-9909-ce9ed25f4510"
-      (reference "R1") (unit 1) (value "5K6") (footprint "Resistor_SMD:R_1206_3216Metric")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/b8e91b61-b1bd-4b7a-be3c-5d9037d65605"
-      (reference "R2") (unit 1) (value "1k") (footprint "Resistor_SMD:R_1206_3216Metric")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/1186db17-9d30-4bd1-8058-03428acf6c66"
-      (reference "R3") (unit 1) (value "39") (footprint "Resistor_SMD:R_1206_3216Metric")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/2809f206-bfa8-409c-bcbb-56e90f0bc5ac"
-      (reference "R4") (unit 1) (value "1k") (footprint "Resistor_SMD:R_1206_3216Metric")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/ec8c2c42-bb20-4356-99b5-760528fdfc48"
-      (reference "R5") (unit 1) (value "39") (footprint "Resistor_SMD:R_1206_3216Metric")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/adfa262f-6718-44ce-956b-2289aff7b88c"
-      (reference "R6") (unit 1) (value "39") (footprint "Resistor_SMD:R_1206_3216Metric")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/2c4e9b47-3d10-4870-81e4-cc20c8636beb"
-      (reference "R7") (unit 1) (value "39") (footprint "Resistor_SMD:R_1206_3216Metric")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/0d07cf6d-c0a4-4583-8b40-93091fdcb27e"
-      (reference "R8") (unit 1) (value "1k") (footprint "Resistor_SMD:R_1206_3216Metric")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/0ed19d83-036d-45ce-96a4-ce57a51fd94a"
-      (reference "R9") (unit 1) (value "1k") (footprint "Resistor_SMD:R_1206_3216Metric")
-    )
-    (path "/38d5e957-879e-408c-8450-ff788dcea95c/789ad8da-c9b3-4ba2-816e-d8b3c8c7edd8"
-      (reference "U1") (unit 1) (value "NodeMcuEsp8266") (footprint "NodeMCU_Module:ESP8266_v3")
-    )
-    (path "/a5c8404b-c871-4957-8f0c-905335996a80/7d49de33-6bed-4608-bb4c-3590a7f5e5f9"
-      (reference "U3") (unit 1) (value "DHT22") (footprint "Sensor:Aosong_DHT11_5.5x12.0_P2.54mm")
-    )
-    (path "/a5c8404b-c871-4957-8f0c-905335996a80/d8e3862f-542c-4d17-b454-1151ca012ce8"
-      (reference "U4") (unit 1) (value "Bmp280Module") (footprint "Modulos:BMP280_Module")
-    )
-  )
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "31567b71-44a6-4f20-978f-6760a129c7a5")
+	(paper "A4")
+	(title_block
+		(title "Nodo de temperatura, humedad y presión")
+		(date "2025-02-25")
+		(rev "2.0")
+		(company "Servicio Meteorológico Nacional (SMN)")
+	)
+	(lib_symbols)
+	(sheet
+		(at 56.134 55.245)
+		(size 53.721 27.305)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "38d5e957-879e-408c-8450-ff788dcea95c")
+		(property "Sheetname" "shield_base"
+			(at 56.134 54.5334 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "shield_base.kicad_sch"
+			(at 56.134 83.1346 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "PcbSistemaAmbienteLab"
+				(path "/31567b71-44a6-4f20-978f-6760a129c7a5"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 144.526 72.771)
+		(size 42.799 21.971)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "a5c8404b-c871-4957-8f0c-905335996a80")
+		(property "Sheetname" "shield_sensor"
+			(at 144.526 72.0594 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "shield_sensor.kicad_sch"
+			(at 144.526 95.3266 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "PcbSistemaAmbienteLab"
+				(path "/31567b71-44a6-4f20-978f-6760a129c7a5"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 143.383 38.735)
+		(size 42.545 24.13)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "ffb5ec71-6abc-4f99-a135-428820e16084")
+		(property "Sheetname" "shield_leds_status"
+			(at 143.383 38.0234 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "shield_leds_status.kicad_sch"
+			(at 143.383 63.4496 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "PcbSistemaAmbienteLab"
+				(path "/31567b71-44a6-4f20-978f-6760a129c7a5"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
 )
