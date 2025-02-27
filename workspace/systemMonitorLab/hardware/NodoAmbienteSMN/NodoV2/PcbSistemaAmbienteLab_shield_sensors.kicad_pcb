@@ -92,7 +92,6 @@
 	(net 6 "unconnected-(U3-NC-Pad3)")
 	(net 7 "unconnected-(J6-Pin_3-Pad3)")
 	(footprint "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal"
-		(locked yes)
 		(layer "F.Cu")
 		(uuid "132a3b93-848d-4f3b-b708-a1453dfb22b3")
 		(at 179.48 86.35 -90)
@@ -900,7 +899,6 @@
 		)
 	)
 	(footprint "Sensor:Aosong_DHT11_5.5x12.0_P2.54mm"
-		(locked yes)
 		(layer "F.Cu")
 		(uuid "1b07efde-43a9-4b3e-b0bc-d30b5a1c0846")
 		(at 171.17 80.25 90)
@@ -1301,7 +1299,6 @@
 		(embedded_fonts no)
 	)
 	(footprint "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal"
-		(locked yes)
 		(layer "F.Cu")
 		(uuid "974e8304-66da-47c8-9a9a-e2d35332fda9")
 		(at 164.9 86.33 -90)
@@ -1310,7 +1307,7 @@
 		(property "Reference" "J5"
 			(at 4.385 -2.27 90)
 			(layer "F.SilkS")
-			(uuid "394951ce-0c44-42d4-9f17-88fbeeb93c3b")
+			(uuid "3545f5fa-bfb3-4c6c-b482-294e63f12522")
 			(effects
 				(font
 					(size 1 1)
@@ -1321,7 +1318,7 @@
 		(property "Value" "Molex_Sensor_BMP280"
 			(at 4.385 9.89 90)
 			(layer "F.Fab")
-			(uuid "fe7ecd8f-ba15-48a6-aa24-69fcd433feb7")
+			(uuid "93214a60-8436-49c9-8b08-f869ff495524")
 			(effects
 				(font
 					(size 1 1)
@@ -1334,7 +1331,7 @@
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "82c0925d-da90-4941-a6ff-fe755e28865d")
+			(uuid "12f2d674-d48c-401b-b36d-0b703ea7a54f")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1347,7 +1344,7 @@
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "1fc78a8c-d59e-4450-bbc3-c3788c8582ad")
+			(uuid "8bb9f6ff-df12-4639-b77f-ade9755b6963")
 			(effects
 				(font
 					(size 1.27 1.27)

@@ -185,7 +185,6 @@
 		(embedded_fonts no)
 	)
 	(footprint "Module_commercial:ESP8266_v3"
-		(locked yes)
 		(layer "F.Cu")
 		(uuid "3f5a284a-eff7-4475-98e9-a1886d7f88ad")
 		(at 133.25 130.6925)
@@ -193,7 +192,7 @@
 			(at 0.35 -49.375 0)
 			(unlocked yes)
 			(layer "F.SilkS")
-			(uuid "d86818cb-fb09-447a-9c0d-4e67defa97ad")
+			(uuid "af55b945-4a66-4bac-875d-0a037d3427f4")
 			(effects
 				(font
 					(size 1 1)
@@ -205,7 +204,7 @@
 			(at -0.675 -2.3 0)
 			(unlocked yes)
 			(layer "F.Fab")
-			(uuid "f381608e-74aa-4d08-bc5a-168225d0c256")
+			(uuid "0c18a5b3-6d0b-444f-a213-69109ac65ed4")
 			(effects
 				(font
 					(size 1 1)
@@ -217,7 +216,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "f9a0eacc-c7cf-430e-9a49-af67461effbd")
+			(uuid "51f5c773-0383-40a5-8022-75a46be90f6f")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -229,7 +228,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "8da8a6c5-413c-42bd-afd3-2c6d57ea6870")
+			(uuid "b6e899a9-da4a-4588-b6ec-51611e25ca03")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -237,7 +236,7 @@
 				)
 			)
 		)
-		(path "/38d5e957-879e-408c-8450-ff788dcea95c/7cd3fddc-4885-4c4d-9240-f50af29bf8fd")
+		(path "/38d5e957-879e-408c-8450-ff788dcea95c/8360271e-6d7c-47ec-829b-7de4439077bb")
 		(sheetname "/shield_base/")
 		(sheetfile "shield_base.kicad_sch")
 		(attr through_hole)
