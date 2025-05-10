@@ -913,6 +913,16 @@
 			(embedded_fonts no)
 		)
 	)
+	(text "Se define en orden inverso las conexiones \nrespecto la placa main boardpara que se\npueda armar el cable derecho"
+		(exclude_from_sim no)
+		(at 192.786 49.53 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "c5a95f4c-915f-4163-89e2-1daf575e4007")
+	)
 	(junction
 		(at 181.61 99.06)
 		(diameter 0)
@@ -921,13 +931,33 @@
 	)
 	(wire
 		(pts
-			(xy 190.5 64.77) (xy 190.5 76.2)
+			(xy 176.53 72.39) (xy 190.5 72.39)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "2b26d15b-387a-40f4-86a7-8fa84b471a8e")
+		(uuid "06cd3ccc-9594-44c9-aaf8-c5e6e6d473d1")
+	)
+	(wire
+		(pts
+			(xy 187.96 64.77) (xy 187.96 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "15fd6969-f04e-4ffb-9850-e5eae8dbe7e2")
+	)
+	(wire
+		(pts
+			(xy 193.04 64.77) (xy 200.66 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1d1a5bcd-a59a-496d-aa0b-a9a1eabd2ae1")
 	)
 	(wire
 		(pts
@@ -941,16 +971,6 @@
 	)
 	(wire
 		(pts
-			(xy 187.96 64.77) (xy 187.96 72.39)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "38c65a08-bb55-4a79-a172-23acdef97df5")
-	)
-	(wire
-		(pts
 			(xy 176.53 91.44) (xy 176.53 99.06)
 		)
 		(stroke
@@ -961,33 +981,23 @@
 	)
 	(wire
 		(pts
-			(xy 187.96 76.2) (xy 187.96 81.28)
+			(xy 185.42 77.47) (xy 193.04 77.47)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "46ad3b25-7568-4f7d-9228-4eb9a7bc05d8")
+		(uuid "7e163384-0e16-418e-84af-8e160715b61c")
 	)
 	(wire
 		(pts
-			(xy 187.96 72.39) (xy 176.53 72.39)
+			(xy 193.04 77.47) (xy 193.04 81.28)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "478bffc6-3a4a-484e-8db7-382566320abf")
-	)
-	(wire
-		(pts
-			(xy 190.5 76.2) (xy 187.96 76.2)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "49a54fb0-48b5-4592-a038-743398e52f55")
+		(uuid "914705b5-3777-4217-b3fa-0332203e10e9")
 	)
 	(wire
 		(pts
@@ -998,6 +1008,16 @@
 			(type default)
 		)
 		(uuid "a7837131-523a-45d5-82b5-a3bdad40df8a")
+	)
+	(wire
+		(pts
+			(xy 185.42 64.77) (xy 185.42 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a883f850-e528-4943-8751-5a790f905a4c")
 	)
 	(wire
 		(pts
@@ -1041,13 +1061,13 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 64.77) (xy 193.04 81.28)
+			(xy 190.5 72.39) (xy 190.5 64.77)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "dc6b9c26-2d66-45fa-9b63-54e7f90ef30c")
+		(uuid "fd64a3a2-5e6b-4f8e-9bd4-e787f17946be")
 	)
 	(symbol
 		(lib_name "GND_2")
@@ -1345,7 +1365,7 @@
 	(symbol
 		(lib_name "GND_1")
 		(lib_id "power:GND")
-		(at 185.42 64.77 270)
+		(at 200.66 64.77 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1354,7 +1374,7 @@
 		(fields_autoplaced yes)
 		(uuid "eb54f9e2-64b9-4454-8955-e7c751d6d0ee")
 		(property "Reference" "#PWR021"
-			(at 179.07 64.77 0)
+			(at 207.01 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1363,7 +1383,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 181.61 64.7699 90)
+			(at 204.47 64.7699 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1372,7 +1392,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 185.42 64.77 0)
+			(at 200.66 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1381,7 +1401,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 185.42 64.77 0)
+			(at 200.66 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1390,7 +1410,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 185.42 64.77 0)
+			(at 200.66 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)

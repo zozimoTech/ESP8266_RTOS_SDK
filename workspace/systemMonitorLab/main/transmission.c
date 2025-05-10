@@ -99,7 +99,8 @@ void tcp_client_task(void *pvParameters)
 					connectionData.ackConnect = 1;
 					xQueueSend(connectionInfoQueue,&connectionData, 0); // Envia el estado a la cola
 					char host[] = "10.10.13.138";
-					uint16_t server_port = 8000;
+					// uint16_t server_port = 8000; //Se usa cuando aplicamos Debug run server
+					uint16_t server_port = 80; //Se usa para produccion con nginx y daphne server
 					char path[] = "/ws/environment-monitoring-system-server/";
 					char key[] = "x3JJHMbDL1EzLkh9GBhXDw==";
 					char header[256];
