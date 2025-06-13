@@ -1476,6 +1476,68 @@
 	)
 	(footprint ""
 		(layer "F.Cu")
+		(uuid "9326e85d-bd53-4013-84ea-7983fee9fb62")
+		(at 125.295 110.21)
+		(property "Reference" ""
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(uuid "e1eaf431-0c9e-46cb-b586-c78a130c343c")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(uuid "c7ba8c96-acdb-4fb5-af41-28e7c4181177")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "13d73c2e-ca48-439e-8605-3010b7aff516")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b39366c2-f35e-4613-9c2a-df5e384017bd")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" thru_hole circle
+			(at 0 0 270)
+			(size 3 3)
+			(drill 1)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(pinfunction "RV")
+			(pintype "bidirectional+no_connect")
+			(uuid "714674c5-a42e-4e63-90c6-a9d527edd4ea")
+		)
+		(embedded_fonts no)
+	)
+	(footprint ""
+		(layer "F.Cu")
 		(uuid "c1124665-0835-4adb-8a19-eb49970e9954")
 		(at 168.1 131.81)
 		(property "Reference" ""
@@ -2080,6 +2142,68 @@
 				(xyz 0 0 0)
 			)
 		)
+	)
+	(footprint ""
+		(layer "F.Cu")
+		(uuid "c982a4eb-7482-4713-8a53-a58629ecdeb8")
+		(at 154.775 81.01)
+		(property "Reference" ""
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(uuid "29a4df01-6580-40b7-a804-e1c4dc19e6d2")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(uuid "bd8e24d4-734e-4d02-acd2-d1808ea2e5a0")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "778db866-c6b6-4ef8-9259-4927e6e87ac0")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a32c9fab-ace3-4832-bd1c-99f15f572a34")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" thru_hole circle
+			(at 0 0 270)
+			(size 3 3)
+			(drill 1)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(pinfunction "RV")
+			(pintype "bidirectional+no_connect")
+			(uuid "34985b05-b0ca-418f-9742-579ece965af0")
+		)
+		(embedded_fonts no)
 	)
 	(footprint "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal"
 		(layer "F.Cu")

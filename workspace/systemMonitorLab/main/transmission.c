@@ -112,7 +112,7 @@ void tcp_client_task(void *pvParameters)
 									"Sec-WebSocket-Version: 13\r\n"
 									"\r\n", path, host, server_port, key);
 
-			//    	sprintf(payloadWebSocket,"i,%d,%s,%s,%s,%s,%s,%s,\r\n",counter,temp_string_dht22,temp_string_aht10,temp_string_bmp280,rh_string_dht22,rh_string_aht10,pressure_string_bmp280);
+			
 					err = send(connectionData.socketNumber, header, strlen(header), 0);
 					if (err < 0) {
 						ESP_LOGE(TAG, "Error occured during sending: errno %d", errno);
@@ -139,9 +139,9 @@ void tcp_client_task(void *pvParameters)
 //		strftime(strftime_buf, sizeof(strftime_buf), "%c", &timeinfo);
 		strftime(hora, sizeof(hora), "%H:%M:%S", &timeinfo);
 		strftime(fecha, sizeof(fecha), "%d-%m-%Y", &timeinfo);
-		sprintf(payload,"------------Datos:\"M;%d;%d;%s;%s;%s;%s;%s;",NUMERO_DE_NODO,counter,fecha,hora,temp_string_bmp280,rh_string_dht22,pressure_string_bmp280);
+		sprintf(payload,"------------Datos:\"M;%d;%d;%s;%s;%s;%s;%s;%s;",NUMERO_DE_NODO,counter,fecha,hora,temp_string_dht22,temp_string_bmp280,rh_string_dht22,pressure_string_bmp280);
 		ESP_LOGI(TAG,payload);
-    	sprintf(payload,"{\"message\":\"M;%d;%d;%s;%s;%s;%s;%s;\"}",NUMERO_DE_NODO,counter,fecha,hora,temp_string_bmp280,rh_string_dht22,pressure_string_bmp280);
+    	sprintf(payload,"{\"message\":\"M;%d;%d;%s;%s;%s;%s;%s;%s;\"}",NUMERO_DE_NODO,counter,fecha,hora,temp_string_dht22,temp_string_bmp280,rh_string_dht22,pressure_string_bmp280);
 
     	if(opTransmitMeasuareWebSocket(payload, &connectionData )==OK){
     		ESP_LOGI(TAG, "Pude enviar sin problemas las mediciones");
