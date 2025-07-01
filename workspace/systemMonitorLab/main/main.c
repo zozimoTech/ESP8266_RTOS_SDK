@@ -40,7 +40,7 @@ void app_main()
 //    Se inicia la conexion Wifi a partir de example connect en C:\esp\ESP8266_RTOS_SDK\examples\common_components\protocol_examples_common
     ESP_ERROR_CHECK(example_connect());
 
-    // Inicializa la cola utilizada para revisar el estado de de la conexión con el servidor WEBsocket
+    // Inicializa la cola utilizada para revisar el estado de de la conexiï¿½n con el servidor WEBsocket
     connectionInfoQueue = xQueueCreate(1, sizeof(connectionInfo)); // Cola para un solo entero
     xTaskCreate(tcp_client_task, "tcp_client", 4096, NULL, 5, NULL);
     xTaskCreate(keep_alive_task, "keep_alive_task", 2048, NULL, 4, NULL);
