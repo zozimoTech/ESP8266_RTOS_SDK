@@ -29,7 +29,7 @@
 #include "sensorBMP280.h"
 #include "configRTC.h"
 
-
+// Tratar de aplicar esto en un ESP32
 void app_main()
 {
 	i2c_example_master_init();
