@@ -115,10 +115,10 @@ Example: MCU has received 40 bits data from AM2302 as
 Binary system Decimal system: RH=652/10=65.2%RH
 
 2) we convert 16 bits T data from binary system to decimal system, 0000 0001 0101 1111  351
-Binary system Decimal system: T=351/10=35.1°C
+Binary system Decimal system: T=351/10=35.1ï¿½C
 
 When highest bit of temperature is 1, it means the temperature is below 0 degree Celsius.
-Example: 1000 0000 0110 0101, T= minus 10.1°C: 16 bits T data
+Example: 1000 0000 0110 0101, T= minus 10.1ï¿½C: 16 bits T data
 
 3) Check Sum=0000 0010+1000 1100+0000 0001+0101 1111=1110 1110 Check-sum=the last 8 bits of Sum=11101110
 
@@ -212,9 +212,12 @@ uint8_t bitInx = 7;
 	humidity *= 0x100;					// >> 8
 	humidity += dhtData[1];
 	humidity /= 10;						// get the decimal
-//Aplico las correcciones obtenidas a partir de la calibración del sensor de RH
-	double m = 1.023;
-	double b = -2.853;
+//Aplico las correcciones obtenidas a partir de la calibraciï¿½n del sensor de RH
+	// double m = 1.023;
+	// double b = -2.853;
+	// Sin correcciones para calibrar el sensor
+	double m = 1;
+	double b = 0;
 	humidity = humidity * m + b;
 
 	if(humidity < 0){
@@ -231,9 +234,13 @@ uint8_t bitInx = 7;
 	temperature += dhtData[3];
 	temperature /= 10;
 
-	//Aplico las correcciones obtenidas a partir de la calibración del sensor de temp
-	m = 1.003;
-	b = -0.584;
+	//Aplico las correcciones obtenidas a partir de la calibraciï¿½n del sensor de temp
+	// m = 1.003;
+	// b = -0.584;
+	// Sin correcciones para calibrar el sensor
+	m = 1;
+	b = 0;
+
 	temperature = temperature * m + b;
 
 	if(temperature < -40){

@@ -559,6 +559,161 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Sensor:DHT11"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at -3.81 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "DHT11"
+				(at 3.81 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Sensor:Aosong_DHT11_5.5x12.0_P2.54mm"
+				(at 0 -10.16 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "http://akizukidenshi.com/download/ds/aosong/DHT11.pdf"
+				(at 3.81 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "3.3V to 5.5V, temperature and humidity module, DHT11"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "digital sensor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Aosong*DHT11*5.5x12.0*P2.54mm*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "DHT11_0_1"
+				(rectangle
+					(start -5.08 5.08)
+					(end 5.08 -5.08)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "DHT11_1_1"
+				(pin no_connect line
+					(at -5.08 0 0)
+					(length 2.54)
+					(hide yes)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 7.62 270)
+					(length 2.54)
+					(name "VDD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -7.62 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name "DATA"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Sensores_comerciales:Bmp280Module"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -733,175 +888,36 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Sensores_comerciales:DHT22"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "U3"
-				(at 6.604 1.2701 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify right)
-				)
+	)
+	(text "Se define en orden inverso las conexiones \nrespecto la placa main boardpara que se\npueda armar el cable derecho"
+		(exclude_from_sim no)
+		(at 119.38 75.438 0)
+		(effects
+			(font
+				(size 1.27 1.27)
 			)
-			(property "Value" "DHT22"
-				(at 6.604 -1.2699 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify right)
-				)
-			)
-			(property "Footprint" "Sensor:Aosong_DHT11_5.5x12.0_P2.54mm"
-				(at 1.27 -26.67 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 1.27 -26.67 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "DHT22_0_1"
-				(rectangle
-					(start -5.08 5.08)
-					(end 5.08 -5.08)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-			(symbol "DHT22_1_1"
-				(pin no_connect line
-					(at -5.08 0 0)
-					(length 2.54)
-					(hide yes)
-					(name "NC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 0 7.62 270)
-					(length 2.54)
-					(name "VCC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 0 -7.62 90)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at 7.62 0 180)
-					(length 2.54)
-					(name "IO"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
 		)
+		(uuid "6bcd6530-ac2a-4af9-b2f2-23c93af81bab")
 	)
 	(junction
-		(at 185.42 63.5)
+		(at 185.42 81.28)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "d231cb99-5b6b-41f8-be54-02e65136ed4f")
+		(uuid "bf437c41-2917-40ba-9b02-1258fc843879")
 	)
 	(no_connect
-		(at 167.64 74.93)
+		(at 161.29 69.85)
 		(uuid "00d837b4-55e9-45f4-a176-31a46546ef31")
 	)
 	(wire
 		(pts
-			(xy 167.64 72.39) (xy 177.8 72.39)
+			(xy 161.29 72.39) (xy 177.8 72.39)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "1159299c-333f-4994-8d3e-fa251b96b994")
-	)
-	(wire
-		(pts
-			(xy 105.41 109.22) (xy 121.92 109.22)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "16dd8ecb-9ffa-47d5-840d-8b30b9f83196")
+		(uuid "068d0bcb-f7c0-4df4-b333-f07baa5aad62")
 	)
 	(wire
 		(pts
@@ -915,17 +931,37 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 106.68) (xy 118.11 106.68)
+			(xy 105.41 104.14) (xy 120.65 104.14)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "55fb6c7e-c7c3-4487-82ad-f9fad2b94609")
+		(uuid "30bed393-ce1b-49fa-8c52-bf9379dbcb3f")
 	)
 	(wire
 		(pts
-			(xy 121.92 106.68) (xy 129.54 106.68)
+			(xy 185.42 81.28) (xy 185.42 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "458100a0-46a2-4e5f-9f2f-885ba5437def")
+	)
+	(wire
+		(pts
+			(xy 105.41 109.22) (xy 118.11 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "57e04c74-3a60-48e4-bfc7-c1ea7156eacc")
+	)
+	(wire
+		(pts
+			(xy 105.41 106.68) (xy 129.54 106.68)
 		)
 		(stroke
 			(width 0)
@@ -935,27 +971,27 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 109.22) (xy 121.92 106.68)
+			(xy 171.45 74.93) (xy 171.45 81.28)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "84c9ec1e-7b49-4789-a40f-eedf3452af75")
+		(uuid "73200a47-fd69-4ecf-ae55-062cff2b5c25")
 	)
 	(wire
 		(pts
-			(xy 173.99 63.5) (xy 185.42 63.5)
+			(xy 185.42 80.01) (xy 185.42 81.28)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "87ed9b59-489f-4e87-9014-aeeaa71652a0")
+		(uuid "a366ec23-6974-415b-bdd7-708dcbcc1e67")
 	)
 	(wire
 		(pts
-			(xy 118.11 97.79) (xy 118.11 106.68)
+			(xy 118.11 97.79) (xy 118.11 109.22)
 		)
 		(stroke
 			(width 0)
@@ -965,7 +1001,17 @@
 	)
 	(wire
 		(pts
-			(xy 120.65 111.76) (xy 120.65 113.03)
+			(xy 171.45 81.28) (xy 185.42 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b2a7129a-4c9d-4fae-8ab2-1e36b08dc0f3")
+	)
+	(wire
+		(pts
+			(xy 120.65 104.14) (xy 120.65 113.03)
 		)
 		(stroke
 			(width 0)
@@ -975,57 +1021,17 @@
 	)
 	(wire
 		(pts
-			(xy 173.99 69.85) (xy 173.99 63.5)
+			(xy 161.29 74.93) (xy 171.45 74.93)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "c96efeed-ee5d-4c40-ab3b-3890f1e12a90")
-	)
-	(wire
-		(pts
-			(xy 167.64 69.85) (xy 173.99 69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d59209bb-700f-4c10-bd39-28a34bb5f7b8")
-	)
-	(wire
-		(pts
-			(xy 105.41 111.76) (xy 120.65 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d9636ccf-6b1e-4cab-9cdb-3e474a139e0a")
-	)
-	(wire
-		(pts
-			(xy 185.42 62.23) (xy 185.42 63.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e2bc99e6-dd93-45c7-8dce-26c76f967a12")
-	)
-	(wire
-		(pts
-			(xy 185.42 63.5) (xy 185.42 64.77)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ff5552cd-619d-4044-8422-1f4ed4f4e097")
+		(uuid "cf8d137c-8090-4e37-8965-12de17c0b061")
 	)
 	(global_label "3V3"
 		(shape input)
-		(at 105.41 104.14 0)
+		(at 105.41 111.76 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -1035,7 +1041,7 @@
 		)
 		(uuid "12eb4077-1a99-48f4-8327-ff52cd2a43bd")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 111.9028 104.14 0)
+			(at 111.9028 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1091,99 +1097,23 @@
 	)
 	(global_label "3V3"
 		(shape input)
-		(at 185.42 62.23 90)
+		(at 185.42 83.82 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "ce21ade0-1cbb-4738-b4b3-bab46826bcab")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 185.4994 56.3093 90)
+			(at 185.42 90.3128 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 				(hide yes)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Sensores_comerciales:DHT22")
-		(at 185.42 72.39 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "223ae4d2-87f8-4395-bd11-b8064c81df12")
-		(property "Reference" "U3"
-			(at 191.77 71.1199 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "DHT22"
-			(at 191.77 73.6599 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Sensor:Aosong_DHT11_5.5x12.0_P2.54mm"
-			(at 184.15 45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 184.15 45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 185.42 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "4bb6026e-d836-4be0-b56b-541f2367719d")
-		)
-		(pin "4"
-			(uuid "87564851-0048-4bed-a0eb-a5cdf8672c15")
-		)
-		(pin "2"
-			(uuid "48a07c2a-ef18-485d-a69d-5e40638bbade")
-		)
-		(pin "1"
-			(uuid "84348f17-cd7a-426f-9699-3bea97ab78ff")
-		)
-		(instances
-			(project ""
-				(path "/31567b71-44a6-4f20-978f-6760a129c7a5/a5c8404b-c871-4957-8f0c-905335996a80"
-					(reference "U3")
-					(unit 1)
-				)
 			)
 		)
 	)
@@ -1324,7 +1254,7 @@
 	(symbol
 		(lib_name "GND_3")
 		(lib_id "power:GND")
-		(at 167.64 77.47 0)
+		(at 161.29 67.31 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1333,7 +1263,7 @@
 		(fields_autoplaced yes)
 		(uuid "28a8b05f-a1e4-467e-9468-301c716287af")
 		(property "Reference" "#PWR018"
-			(at 167.64 83.82 0)
+			(at 161.29 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1342,15 +1272,16 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 167.64 82.55 0)
+			(at 163.83 66.0399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
-			(at 167.64 77.47 0)
+			(at 161.29 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1359,7 +1290,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 167.64 77.47 0)
+			(at 161.29 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1368,7 +1299,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 167.64 77.47 0)
+			(at 161.29 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1396,7 +1327,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "4fbf1954-4553-451f-8a44-55a2794455a5")
 		(property "Reference" "J5"
 			(at 100.965 99.06 0)
@@ -1407,7 +1337,7 @@
 			)
 		)
 		(property "Value" "Molex_Sensor_BMP280"
-			(at 100.965 101.6 0)
+			(at 101.092 100.584 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1465,7 +1395,7 @@
 	(symbol
 		(lib_name "GND_3")
 		(lib_id "power:GND")
-		(at 185.42 80.01 0)
+		(at 185.42 64.77 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1474,7 +1404,7 @@
 		(fields_autoplaced yes)
 		(uuid "777b3313-5051-4c47-85b7-1cf72f85b21c")
 		(property "Reference" "#PWR019"
-			(at 185.42 86.36 0)
+			(at 185.42 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1483,7 +1413,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 185.42 85.09 0)
+			(at 185.42 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1491,7 +1421,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 185.42 80.01 0)
+			(at 185.42 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1500,7 +1430,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 185.42 80.01 0)
+			(at 185.42 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1509,7 +1439,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 185.42 80.01 0)
+			(at 185.42 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1524,6 +1454,82 @@
 			(project ""
 				(path "/31567b71-44a6-4f20-978f-6760a129c7a5/a5c8404b-c871-4957-8f0c-905335996a80"
 					(reference "#PWR019")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor:DHT11")
+		(at 185.42 72.39 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "81e81436-4b79-4f6c-ab1a-b931899ff42e")
+		(property "Reference" "U4"
+			(at 191.77 71.1199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "DHT22"
+			(at 191.77 73.6599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Sensor:Aosong_DHT11_5.5x12.0_P2.54mm"
+			(at 185.42 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://akizukidenshi.com/download/ds/aosong/DHT11.pdf"
+			(at 181.61 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "3.3V to 5.5V, temperature and humidity module, DHT11"
+			(at 185.42 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "4"
+			(uuid "86f152a2-877d-44e2-8362-fc7bff62e66c")
+		)
+		(pin "1"
+			(uuid "9b1d9771-cab5-4d4c-8861-a3061d8556a9")
+		)
+		(pin "2"
+			(uuid "228d9164-cd2b-4f06-8c39-c5d9b3fc715e")
+		)
+		(pin "3"
+			(uuid "1f1f52bf-7d19-4025-b64a-9cf29057dc13")
+		)
+		(instances
+			(project ""
+				(path "/31567b71-44a6-4f20-978f-6760a129c7a5/a5c8404b-c871-4957-8f0c-905335996a80"
+					(reference "U4")
 					(unit 1)
 				)
 			)
@@ -1680,16 +1686,15 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x04_Pin")
-		(at 162.56 72.39 0)
+		(at 156.21 69.85 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "f4348b3a-8edc-48dc-a0b7-661c1f6eb73a")
+		(uuid "da59f34c-aec0-4115-9c6d-f7384b80bf4a")
 		(property "Reference" "J6"
-			(at 163.195 64.77 0)
+			(at 156.845 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1697,7 +1702,7 @@
 			)
 		)
 		(property "Value" "Molex_Sensor_DHT22"
-			(at 163.195 67.31 0)
+			(at 157.226 77.978 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1705,7 +1710,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal"
-			(at 162.56 72.39 0)
+			(at 156.21 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1714,7 +1719,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 162.56 72.39 0)
+			(at 156.21 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1723,7 +1728,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x04, script generated"
-			(at 162.56 72.39 0)
+			(at 156.21 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1732,16 +1737,16 @@
 			)
 		)
 		(pin "2"
-			(uuid "9e00bb53-4d37-4420-b8b1-84a526c14708")
+			(uuid "666004d6-5dc7-4031-91da-0f405d38af78")
 		)
 		(pin "4"
-			(uuid "c672e93d-8815-4878-b6d6-189ab790879f")
+			(uuid "bb440e57-e329-4482-828b-ced88c17cacd")
 		)
 		(pin "3"
-			(uuid "eeb58528-a138-49a0-baf5-0415dbdc6a4d")
+			(uuid "ee7ed24a-4482-4add-a638-a6a22f6f38b9")
 		)
 		(pin "1"
-			(uuid "87a3698f-49e9-4eea-a9ad-8d73edc7a5ec")
+			(uuid "f05efa8b-bc91-49fd-bc04-402c4b690352")
 		)
 		(instances
 			(project "PcbSistemaAmbienteLab"

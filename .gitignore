@@ -90,3 +90,14 @@ bom/
 out/
 
 # End of https://www.toptal.com/developers/gitignore/api/kicad
+
+
+# Environments
+.env
+.venv
+myenv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/

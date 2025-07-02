@@ -8,7 +8,7 @@
 #define GPIO_OUTPUT_LED_3    13
 #define GPIO_OUTPUT_LED_4    15
 #define GPIO_OUTPUT_PIN_MASK_TO_SET  ((1ULL<<GPIO_OUTPUT_LED_1) | (1ULL<<GPIO_OUTPUT_LED_2) | (1ULL<<GPIO_OUTPUT_LED_3) | (1ULL<<GPIO_OUTPUT_LED_4) )
-// Definición de la cola (¡NO inicializar aquí!)
+// Definiciï¿½n de la cola (ï¿½NO inicializar aquï¿½!)
 QueueHandle_t connectionInfoQueue;
 char payload[300];
 
@@ -65,10 +65,10 @@ void tcp_client_task(void *pvParameters)
 // Obtener el tiempo actual
    time(&now);
    localtime_r(&now, &timeinfo);
-   // Calcular cuántos segundos faltan para el próximo intervalo
+   // Calcular cuï¿½ntos segundos faltan para el prï¿½ximo intervalo
    int seconds_until_next_interval = TRANSMISSION_INTERVAL - (timeinfo.tm_sec % TRANSMISSION_INTERVAL);
-   // Esperar hasta el próximo intervalo
-  ESP_LOGI(TAG, "Esperando %d segundos para comenzar en el próximo intervalo...", seconds_until_next_interval);
+   // Esperar hasta el prï¿½ximo intervalo
+  ESP_LOGI(TAG, "Esperando %d segundos para comenzar en el prï¿½ximo intervalo...", seconds_until_next_interval);
   vTaskDelay(seconds_until_next_interval * 1000 / portTICK_PERIOD_MS);
 
 
@@ -98,8 +98,9 @@ void tcp_client_task(void *pvParameters)
 					ESP_LOGI(TAG, "Successfully connected");
 					connectionData.ackConnect = 1;
 					xQueueSend(connectionInfoQueue,&connectionData, 0); // Envia el estado a la cola
-					char host[] = "10.10.13.180";
-					uint16_t server_port = 8000;
+					char host[] = "10.10.13.138";
+					// uint16_t server_port = 8000; //Se usa cuando aplicamos Debug run server
+					uint16_t server_port = 80; //Se usa para produccion con nginx y daphne server
 					char path[] = "/ws/environment-monitoring-system-server/";
 					char key[] = "x3JJHMbDL1EzLkh9GBhXDw==";
 					char header[256];
@@ -111,7 +112,7 @@ void tcp_client_task(void *pvParameters)
 									"Sec-WebSocket-Version: 13\r\n"
 									"\r\n", path, host, server_port, key);
 
-			//    	sprintf(payloadWebSocket,"i,%d,%s,%s,%s,%s,%s,%s,\r\n",counter,temp_string_dht22,temp_string_aht10,temp_string_bmp280,rh_string_dht22,rh_string_aht10,pressure_string_bmp280);
+			
 					err = send(connectionData.socketNumber, header, strlen(header), 0);
 					if (err < 0) {
 						ESP_LOGE(TAG, "Error occured during sending: errno %d", errno);
@@ -138,9 +139,9 @@ void tcp_client_task(void *pvParameters)
 //		strftime(strftime_buf, sizeof(strftime_buf), "%c", &timeinfo);
 		strftime(hora, sizeof(hora), "%H:%M:%S", &timeinfo);
 		strftime(fecha, sizeof(fecha), "%d-%m-%Y", &timeinfo);
-		sprintf(payload,"------------Datos:\"M;%d;%d;%s;%s;%s;%s;%s;",NUMERO_DE_NODO,counter,fecha,hora,temp_string_bmp280,rh_string_dht22,pressure_string_bmp280);
+		sprintf(payload,"------------Datos:\"M;%d;%d;%s;%s;%s;%s;%s;%s;",NUMERO_DE_NODO,counter,fecha,hora,temp_string_dht22,temp_string_bmp280,rh_string_dht22,pressure_string_bmp280);
 		ESP_LOGI(TAG,payload);
-    	sprintf(payload,"{\"message\":\"M;%d;%d;%s;%s;%s;%s;%s;\"}",NUMERO_DE_NODO,counter,fecha,hora,temp_string_bmp280,rh_string_dht22,pressure_string_bmp280);
+    	sprintf(payload,"{\"message\":\"M;%d;%d;%s;%s;%s;%s;%s;%s;\"}",NUMERO_DE_NODO,counter,fecha,hora,temp_string_dht22,temp_string_bmp280,rh_string_dht22,pressure_string_bmp280);
 
     	if(opTransmitMeasuareWebSocket(payload, &connectionData )==OK){
     		ESP_LOGI(TAG, "Pude enviar sin problemas las mediciones");
@@ -150,7 +151,7 @@ void tcp_client_task(void *pvParameters)
     		ESP_LOGI(TAG, "No se pudo enviar las mediciones");
     	}
 		counter = counter + 1;
-		// Esperar hasta el próximo intervalo
+		// Esperar hasta el prï¿½ximo intervalo
 		time(&now);
 		localtime_r(&now, &timeinfo);
 		seconds_until_next_interval = TRANSMISSION_INTERVAL - (timeinfo.tm_sec % TRANSMISSION_INTERVAL);
@@ -198,7 +199,7 @@ bool opTransmitMeasuareWebSocket(char * tableData,connectionInfo * connectionDat
 
 
 
-// Implementación de la tarea keep_alive_task (como en la respuesta anterior)
+// Implementaciï¿½n de la tarea keep_alive_task (como en la respuesta anterior)
 void keep_alive_task(void *pvParameters) {
     connectionInfo receivedData;
 	int err =0;
@@ -222,11 +223,11 @@ void keep_alive_task(void *pvParameters) {
 				receivedData.ackConnect = 0;
 				break;
 			}
-			// ... (código para enviar mensaje de keep-alive)
+			// ... (cï¿½digo para enviar mensaje de keep-alive)
 		} else {
 			ESP_LOGI(TAG, "Keep Alive: Conexion inactiva");
 			ESP_LOGI(TAG, "Estado de conexion, dato de la cola: %d", receivedData.ackConnect);
-			// Realizar acciones necesarias si la conexión está inactiva
+			// Realizar acciones necesarias si la conexiï¿½n estï¿½ inactiva
 		}
 //        }
         vTaskDelay(1000 / portTICK_PERIOD_MS); // Ejemplo: revisa cada 5 segundos
@@ -252,7 +253,7 @@ void encodeMessage126(uint8_t * buf, uint8_t * message,size_t message_len){
 	uint16_t largo = ((uint16_t)buf_len);
 	message[2] = (largo & 0xFF00)>>8;
 	message[3] = (largo & 0x00FF)>>0;
-	uint32_t mask_key = 0x12345678; // Clave de codificación
+	uint32_t mask_key = 0x12345678; // Clave de codificaciï¿½n
 	//Copio la clave
 	message[4] = (mask_key & 0xFF000000)>>24;	//0x12
 	message[5] = (mask_key & 0x00FF0000)>>16;	//0x34
@@ -266,7 +267,7 @@ void encodeMessage126(uint8_t * buf, uint8_t * message,size_t message_len){
 	int value = 4;
 	for (int i = 8; i < buf_len + 8; i++) {
 	//		uint8_t a = ((uint8_t*)&mask_key)[i % 4];
-	//	    message[i] ^= ((uint8_t*)&mask_key)[i % 4]; // Aplicar XOR con la clave de codificación
+	//	    message[i] ^= ((uint8_t*)&mask_key)[i % 4]; // Aplicar XOR con la clave de codificaciï¿½n
 		message[i] ^= message[value];
 		value++;
 		if(value > 7){
@@ -286,7 +287,7 @@ void encodeMessage125(uint8_t * buf, uint8_t * message, size_t message_len){
 		message[0] = 0x81; // Opcode 0x1 y datos enmascarados
 		//	uint16_taux = ((uint16_t)strlen(aux)) | 0x8000;
 		message[1] = ((uint8_t)buf_len) | 0x80; // Longitud de los datos y seteo el bit de enmascaramiento
-		uint32_t mask_key = 0x12345678; // Clave de codificación
+		uint32_t mask_key = 0x12345678; // Clave de codificaciï¿½n
 		//Copio la clave
 		message[2] = (mask_key & 0xFF000000)>>24;	//0x12
 		message[3] = (mask_key & 0x00FF0000)>>16;	//0x34
@@ -300,7 +301,7 @@ void encodeMessage125(uint8_t * buf, uint8_t * message, size_t message_len){
 		int value = 2;
 		for (int i = 6; i < buf_len + 6; i++) {
 	//		uint8_t a = ((uint8_t*)&mask_key)[i % 4];
-	//	    message[i] ^= ((uint8_t*)&mask_key)[i % 4]; // Aplicar XOR con la clave de codificación
+	//	    message[i] ^= ((uint8_t*)&mask_key)[i % 4]; // Aplicar XOR con la clave de codificaciï¿½n
 			message[i] ^= message[value];
 			value++;
 			if(value > 5){
