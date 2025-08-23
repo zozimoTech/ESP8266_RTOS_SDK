@@ -44,7 +44,7 @@
 		(tenting front back)
 		(grid_origin 116.825 131.21)
 		(pcbplotparams
-			(layerselection 0x00000000_00000000_55555555_5755f5ff)
+			(layerselection 0x00000000_00000000_55555555_55555554)
 			(plot_on_all_layers_selection 0x00000000_00000000_00000000_00000000)
 			(disableapertmacros no)
 			(usegerberextensions no)
@@ -67,21 +67,20 @@
 			(dxfpolygonmode yes)
 			(dxfimperialunits yes)
 			(dxfusepcbnewfont yes)
-			(psnegative no)
+			(psnegative yes)
 			(psa4output no)
 			(plot_black_and_white yes)
-			(plotinvisibletext no)
 			(sketchpadsonfab no)
 			(plotpadnumbers no)
 			(hidednponfab no)
 			(sketchdnponfab yes)
 			(crossoutdnponfab yes)
 			(subtractmaskfromsilk no)
-			(outputformat 1)
+			(outputformat 4)
 			(mirror no)
-			(drillshape 1)
+			(drillshape 0)
 			(scaleselection 1)
-			(outputdirectory "")
+			(outputdirectory "./")
 		)
 	)
 	(net 0 "")
@@ -246,7 +245,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Module_commercial:ESP8266_v3"
+	(footprint "Library:ESP8266_v3"
 		(layer "F.Cu")
 		(uuid "3f5a284a-eff7-4475-98e9-a1886d7f88ad")
 		(at 133.25 130.6925)
@@ -311,7 +310,7 @@
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "447f8724-baab-4fdc-8205-1b20ec235a4d")
+			(uuid "c0095ace-f2d8-4643-8d8d-cf878b4060af")
 		)
 		(fp_rect
 			(start -14.35 -3.5)
@@ -322,7 +321,7 @@
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "4fd7d8ae-d58f-42bd-8524-32ccdd12fa1f")
+			(uuid "e94b3d63-19a2-47f2-8001-13ade23f4d73")
 		)
 		(fp_rect
 			(start -13.5 -4.5)
@@ -333,7 +332,7 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "e8cc3de0-ad39-4c46-a81f-654145c7a2b3")
+			(uuid "e00658f3-175b-4e1e-b45b-a3e9a2e6bec4")
 		)
 		(pad "1" thru_hole rect
 			(at -12.35 -51.06 180)
@@ -6269,7 +6268,7 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "78.0000 mm"
+		(gr_text "78,0000 mm"
 			(at 189.105 97.96 90)
 			(layer "Dwgs.User")
 			(uuid "186510b9-763a-4205-9ce0-e4cf9e77271c")
@@ -6306,7 +6305,7 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "57.0000 mm"
+		(gr_text "57,0000 mm"
 			(at 143.275 50.77 0)
 			(layer "Dwgs.User")
 			(uuid "73861f15-86be-4165-89fb-0090c276d491")
@@ -6343,7 +6342,7 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "46.0000 mm"
+		(gr_text "46,0000 mm"
 			(at 143.45 144.21 0)
 			(layer "Dwgs.User")
 			(uuid "80f1fa95-3c1f-479f-8461-0c367b3c3746")
@@ -6380,7 +6379,7 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "67.5000 mm"
+		(gr_text "67,5000 mm"
 			(at 105.65 97.86 90)
 			(layer "Dwgs.User")
 			(uuid "ea5aed39-ac8a-41ad-9e3d-3fff9657b123")
