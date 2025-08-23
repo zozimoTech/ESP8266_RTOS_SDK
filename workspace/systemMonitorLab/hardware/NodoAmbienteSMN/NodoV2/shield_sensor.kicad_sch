@@ -714,12 +714,12 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Sensores_comerciales:Bmp280Module"
+		(symbol "simbolos:Bmp280Module"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "U4"
-				(at 2.0194 14.732 0)
+			(property "Reference" "U2"
+				(at 2.1433 13.97 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -728,7 +728,7 @@
 				)
 			)
 			(property "Value" "Bmp280Module"
-				(at 2.0194 12.192 0)
+				(at 2.1433 11.43 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -736,7 +736,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" "Modulos:BMP280_Module"
+			(property "Footprint" "Modulos_comerciales:BMP280_Module"
 				(at 39.37 -21.59 0)
 				(effects
 					(font
@@ -1114,6 +1114,88 @@
 				)
 				(justify right)
 				(hide yes)
+			)
+		)
+	)
+	(symbol
+		(lib_id "simbolos:Bmp280Module")
+		(at 142.24 110.49 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "052e5022-fdd0-419f-8fce-a5284e0a3edb")
+		(property "Reference" "U2"
+			(at 144.3833 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Bmp280Module"
+			(at 144.3833 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Modulos_comerciales:BMP280_Module"
+			(at 181.61 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 138.43 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 142.24 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "b4edb314-f25f-44fc-bee1-47fa513e1490")
+		)
+		(pin "6"
+			(uuid "11b32475-15a4-4dcd-b5ea-49882798613f")
+		)
+		(pin "4"
+			(uuid "c2dd66a0-659f-4cb0-ab2f-c19afbc215fd")
+		)
+		(pin "1"
+			(uuid "f991a424-7cd0-4c68-96ff-1a1cd3d08b0d")
+		)
+		(pin "3"
+			(uuid "8734a138-fdda-43be-9737-c3953ce73536")
+		)
+		(pin "2"
+			(uuid "63691330-a849-486c-b4b3-0871d3cc29ff")
+		)
+		(instances
+			(project ""
+				(path "/31567b71-44a6-4f20-978f-6760a129c7a5/a5c8404b-c871-4957-8f0c-905335996a80"
+					(reference "U2")
+					(unit 1)
+				)
 			)
 		)
 	)
@@ -1530,88 +1612,6 @@
 			(project ""
 				(path "/31567b71-44a6-4f20-978f-6760a129c7a5/a5c8404b-c871-4957-8f0c-905335996a80"
 					(reference "U4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Sensores_comerciales:Bmp280Module")
-		(at 142.24 110.49 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "a87e2d9d-0fa5-4799-a46e-318f31b9a0ff")
-		(property "Reference" "U2"
-			(at 144.3833 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "Bmp280Module"
-			(at 144.3833 99.06 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Sensors_commercial:BMP280_Module"
-			(at 181.61 132.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 138.43 111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 142.24 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "4"
-			(uuid "6e28906e-bc67-46f6-ba1d-6653d2062993")
-		)
-		(pin "3"
-			(uuid "a77d34c9-a326-4148-9535-37c403d1bab8")
-		)
-		(pin "6"
-			(uuid "0bafaba7-ded1-4755-85df-e418a0725d71")
-		)
-		(pin "2"
-			(uuid "ba7498ef-13a5-4bb9-96e4-da15bd4930ec")
-		)
-		(pin "1"
-			(uuid "e9a7add4-4095-4a28-85c3-6fb0eed4c932")
-		)
-		(pin "5"
-			(uuid "f96ee5e7-8834-4168-8ca9-4a0d48aa7c3c")
-		)
-		(instances
-			(project ""
-				(path "/31567b71-44a6-4f20-978f-6760a129c7a5/a5c8404b-c871-4957-8f0c-905335996a80"
-					(reference "U2")
 					(unit 1)
 				)
 			)
