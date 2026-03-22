@@ -275,7 +275,7 @@
       "plot": "negativos/",
       "pos_files": "",
       "specctra_dsn": "PcbSistemaAmbienteLab_shield_base_2.dsn",
-      "step": "",
+      "step": "PcbSistemaAmbienteLab_shield_base_2.step",
       "svg": "",
       "vrml": ""
     },

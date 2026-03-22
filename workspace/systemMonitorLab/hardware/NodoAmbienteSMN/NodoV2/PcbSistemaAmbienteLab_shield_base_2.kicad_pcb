@@ -70,6 +70,7 @@
 			(psnegative yes)
 			(psa4output no)
 			(plot_black_and_white yes)
+			(plotinvisibletext no)
 			(sketchpadsonfab no)
 			(plotpadnumbers no)
 			(hidednponfab no)
@@ -6268,7 +6269,7 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "78,0000 mm"
+		(gr_text "78.0000 mm"
 			(at 189.105 97.96 90)
 			(layer "Dwgs.User")
 			(uuid "186510b9-763a-4205-9ce0-e4cf9e77271c")
@@ -6305,7 +6306,7 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "57,0000 mm"
+		(gr_text "57.0000 mm"
 			(at 143.275 50.77 0)
 			(layer "Dwgs.User")
 			(uuid "73861f15-86be-4165-89fb-0090c276d491")
@@ -6342,7 +6343,7 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "46,0000 mm"
+		(gr_text "46.0000 mm"
 			(at 143.45 144.21 0)
 			(layer "Dwgs.User")
 			(uuid "80f1fa95-3c1f-479f-8461-0c367b3c3746")
@@ -6379,7 +6380,7 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "67,5000 mm"
+		(gr_text "67.5000 mm"
 			(at 105.65 97.86 90)
 			(layer "Dwgs.User")
 			(uuid "ea5aed39-ac8a-41ad-9e3d-3fff9657b123")
