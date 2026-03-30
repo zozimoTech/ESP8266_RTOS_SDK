@@ -150,10 +150,6 @@ esp_err_t get_calib_param(i2c_port_t i2c_num, bmp280_calib_param_t *calib_param)
     return ret;  // Retorna ESP_OK si todo fue exitoso.
 }
 
-
-
-
-
 esp_err_t readTemperatureBmp280(i2c_port_t i2c_num, double *temperature,bmp280_calib_param_t *calib_param){
 	int ret;
 	uint8_t sensor_data[6];

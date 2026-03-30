@@ -8,7 +8,7 @@
 #define GPIO_OUTPUT_LED_3    13
 #define GPIO_OUTPUT_LED_4    15
 #define GPIO_OUTPUT_PIN_MASK_TO_SET  ((1ULL<<GPIO_OUTPUT_LED_1) | (1ULL<<GPIO_OUTPUT_LED_2) | (1ULL<<GPIO_OUTPUT_LED_3) | (1ULL<<GPIO_OUTPUT_LED_4) )
-// Definici�n de la cola (�NO inicializar aqu�!)
+// Definicion de la cola (NO inicializar aqui!)
 QueueHandle_t connectionInfoQueue;
 char payload[300];
 
@@ -30,24 +30,24 @@ void tcp_client_task(void *pvParameters)
 	int cnt = 0;
 
     #ifdef CONFIG_EXAMPLE_IPV4
-            struct sockaddr_in destAddr;
-            destAddr.sin_addr.s_addr = inet_addr(HOST_IP_ADDR);
-            destAddr.sin_family = AF_INET;
-            destAddr.sin_port = htons(PORT);
-            addr_family = AF_INET;
-            ip_protocol = IPPROTO_TCP;
-            inet_ntoa_r(destAddr.sin_addr, addr_str, sizeof(addr_str) - 1);
+		struct sockaddr_in destAddr;
+		destAddr.sin_addr.s_addr = inet_addr(HOST_IP_ADDR);
+		destAddr.sin_family = AF_INET;
+		destAddr.sin_port = htons(PORT);
+		addr_family = AF_INET;
+		ip_protocol = IPPROTO_TCP;
+		inet_ntoa_r(destAddr.sin_addr, addr_str, sizeof(addr_str) - 1);
     #else // IPV6
-            struct sockaddr_in6 destAddr;
-            inet6_aton(HOST_IP_ADDR, &destAddr.sin6_addr);
-            destAddr.sin6_family = AF_INET6;
-            destAddr.sin6_port = htons(PORT);
-            destAddr.sin6_scope_id = tcpip_adapter_get_netif_index(TCPIP_ADAPTER_IF_STA);
-            addr_family = AF_INET6;
-            ip_protocol = IPPROTO_IPV6;
-            inet6_ntoa_r(destAddr.sin6_addr, addr_str, sizeof(addr_str) - 1);
+		struct sockaddr_in6 destAddr;
+		inet6_aton(HOST_IP_ADDR, &destAddr.sin6_addr);
+		destAddr.sin6_family = AF_INET6;
+		destAddr.sin6_port = htons(PORT);
+		destAddr.sin6_scope_id = tcpip_adapter_get_netif_index(TCPIP_ADAPTER_IF_STA);
+		addr_family = AF_INET6;
+		ip_protocol = IPPROTO_IPV6;
+		inet6_ntoa_r(destAddr.sin6_addr, addr_str, sizeof(addr_str) - 1);
     #endif
-// Configurar los Leds de estado
+	// Configurar los Leds de estado
 	gpio_config_t io_conf;
 	//disable interrupt
 	io_conf.intr_type = GPIO_INTR_DISABLE;
@@ -62,14 +62,14 @@ void tcp_client_task(void *pvParameters)
 	//configure GPIO with the given settings
 	gpio_config(&io_conf);
 
-// Obtener el tiempo actual
-   time(&now);
-   localtime_r(&now, &timeinfo);
-   // Calcular cu�ntos segundos faltan para el pr�ximo intervalo
-   int seconds_until_next_interval = TRANSMISSION_INTERVAL - (timeinfo.tm_sec % TRANSMISSION_INTERVAL);
-   // Esperar hasta el pr�ximo intervalo
-  ESP_LOGI(TAG, "Esperando %d segundos para comenzar en el pr�ximo intervalo...", seconds_until_next_interval);
-  vTaskDelay(seconds_until_next_interval * 1000 / portTICK_PERIOD_MS);
+	// Obtener el tiempo actual
+	time(&now);
+	localtime_r(&now, &timeinfo);
+	// Calcular cu�ntos segundos faltan para el proximo intervalo
+	int seconds_until_next_interval = TRANSMISSION_INTERVAL - (timeinfo.tm_sec % TRANSMISSION_INTERVAL);
+	// Esperar hasta el proximo intervalo
+	ESP_LOGI(TAG, "Esperando %d segundos para comenzar en el proximo intervalo...", seconds_until_next_interval);
+	vTaskDelay(seconds_until_next_interval * 1000 / portTICK_PERIOD_MS);
 
 
     while (1) {
@@ -98,7 +98,8 @@ void tcp_client_task(void *pvParameters)
 					ESP_LOGI(TAG, "Successfully connected");
 					connectionData.ackConnect = 1;
 					xQueueSend(connectionInfoQueue,&connectionData, 0); // Envia el estado a la cola
-					char host[] = "10.10.13.138";
+					// char host[] = "10.10.13.138";
+					char host[] = "sc-web.local";
 					// uint16_t server_port = 8000; //Se usa cuando aplicamos Debug run server
 					uint16_t server_port = 80; //Se usa para produccion con nginx y daphne server
 					char path[] = "/ws/environment-monitoring-system-server/";
@@ -193,10 +194,6 @@ bool opTransmitMeasuareWebSocket(char * tableData,connectionInfo * connectionDat
 	return OK;/*OK = 0*/
 
 }
-
-
-
-
 
 
 // Implementaci�n de la tarea keep_alive_task (como en la respuesta anterior)

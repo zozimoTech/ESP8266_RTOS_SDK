@@ -40,10 +40,10 @@
 
 /*==================[typedef]================================================*/
 
-// Define una estructura para el estado de la conexión y el socket
+// Define una estructura para el estado de la conexiï¿½n y el socket
 typedef struct {
     int ackConnect; // 1: conectado, 0: desconectado
-    int socketNumber;     // Número del socket o -1 si no hay socket
+    int socketNumber;     // Nï¿½mero del socket o -1 si no hay socket
 } connectionInfo;
 
 
@@ -55,7 +55,7 @@ typedef struct {
 //const char *TAG = "example";
 //const char *payload = "Message from ESP32 ";
 //const char *payload2[300];
-// Declaración externa de la cola
+// Declaraciï¿½n externa de la cola
 extern QueueHandle_t connectionInfoQueue;
 
 /*==================[external functions declaration]=========================*/
@@ -64,10 +64,6 @@ extern void encodeMessage125(uint8_t * buf, uint8_t * message,size_t message_len
 extern bool opTransmitMeasuareWebSocket(char * tableData,connectionInfo * connectionData);
 extern void tcp_client_task(void *pvParameters);
 extern void keep_alive_task(void *pvParameters);
-
-
-
-
 
 /*==================[end of file]============================================*/
 #endif

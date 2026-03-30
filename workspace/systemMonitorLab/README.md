@@ -1,36 +1,43 @@
 
-# TCP Client example
+# Proyecto: systemMonitorLab
 
 (See the README.md file in the upper level 'examples' directory for more information about examples.)
 
-The application creates a TCP socket and tries to connect to the server with predefined IP address and port number. When a connection is successfully established, the application sends message and waits for the answer. After the server's reply, application prints received reply as ASCII text, waits for 2 seconds and sends another message.
+Este proyecto implementa un sistema de monitoreo ambiental basado en el ESP8266 utilizando el SDK de RTOS. La aplicación recopila datos de múltiples sensores (temperatura, humedad y presión) y los transmite periódicamente a un servidor remoto a través de una conexión WebSocket.
 
-## How to use example
+## Características Principales
 
-In order to create TCP server that communicates with TCP Client example, choose one of the following options.
+*   **Múltiples Sensores:** Lee datos de los siguientes sensores:
+    *   **DHT22:** Temperatura y humedad.
+    *   **AHT10:** Temperatura y humedad (a través de I2C).
+    *   **BMP280:** Presión barométrica y temperatura (a través de I2C).
+*   **Conectividad WiFi:** Se conecta a una red WiFi para acceder a internet.
+*   **Sincronización de Tiempo:** Utiliza el protocolo SNTP para obtener la fecha y hora actual y la ajusta a la zona horaria local (ART).
+*   **Transmisión de Datos:** Establece una conexión WebSocket con un servidor para enviar los datos de los sensores en tiempo real.
+*   **Multitarea:** Utiliza FreeRTOS para gestionar tareas concurrentes para cada sensor, la transmisión de datos y tareas de mantenimiento como el `keep-alive` de la conexión.
+*   **Gestión de Bus I2C:** Emplea un mutex para garantizar un acceso seguro y concurrente al bus I2C por parte de los sensores que lo utilizan (AHT10 y BMP280).
 
-There are many host-side tools which can be used to interact with the UDP/TCP server/client. 
-One command line tool is [netcat](http://netcat.sourceforge.net) which can send and receive many kinds of packets. 
-Note: please replace `192.168.0.167 3333` with desired IPV4/IPV6 address (displayed in monitor console) and port number in the following command.
+## Detalles de la Implementación
 
-In addition to those tools, simple Python scripts can be found under sockets/scripts directory. Every script is designed to interact with one of the examples.
+### Servidor WebSocket
+La aplicación está configurada para conectarse a un servidor WebSocket en la siguiente dirección:
+`ws://sc-web.local/ws/environment-monitoring-system-server/`
 
-### TCP server using netcat
-```
-nc -l 192.168.0.167 -p 3333
-```
+### Formato de los Datos
+Los datos de los sensores se envían en un payload JSON con el siguiente formato:
+`{"message":"M;{NUMERO_DE_NODO};{contador};{fecha};{hora};{temp_dht22};{temp_bmp280};{rh_dht22};{pressure_bmp280};"}`
 
-### Python scripts
-Script tcpserver.py contains configuration for port number and IP version (IPv4 or IPv6) that has to be altered to match the values used by the application. Example:
-
-```
-IP_VERSION = 'IPv4'
-PORT = 3333;
-```
+*   `NUMERO_DE_NODO`: Identificador del dispositivo.
+*   `contador`: Contador de mensajes enviados.
+*   `fecha` y `hora`: Obtenidas del RTC sincronizado por SNTP.
+*   `temp_dht22`, `temp_bmp280`, `rh_dht22`, `pressure_bmp280`: Valores leídos de los sensores.
 
 ## Hardware Required
 
-This example can be run on any commonly available ESP32 development board.
+*   Placa de desarrollo basada en ESP8266.
+*   Sensor DHT22.
+*   Sensor AHT10.
+*   Sensor BMP280.
 
 ## Configure the project
 
