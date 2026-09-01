@@ -7,7 +7,7 @@
 .project
 
 # vscode setting
-.vscode
+#.vscode
 
 # Example project files
 examples/**/sdkconfig

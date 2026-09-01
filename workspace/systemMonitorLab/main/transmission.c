@@ -3,11 +3,16 @@
 #include "driver/gpio.h"
 #include "configRTC.h"
 
-#define GPIO_OUTPUT_LED_1    5
-#define GPIO_OUTPUT_LED_2    12
-#define GPIO_OUTPUT_LED_3    13
-#define GPIO_OUTPUT_LED_4    15
-#define GPIO_OUTPUT_PIN_MASK_TO_SET  ((1ULL<<GPIO_OUTPUT_LED_1) | (1ULL<<GPIO_OUTPUT_LED_2) | (1ULL<<GPIO_OUTPUT_LED_3) | (1ULL<<GPIO_OUTPUT_LED_4) )
+	// #define GPIO_OUTPUT_LED_1    5
+	// #define GPIO_OUTPUT_LED_2    12
+	// #define GPIO_OUTPUT_LED_3    13
+	// #define GPIO_OUTPUT_LED_4    15
+gpio_num_t led_yellow = GPIO_NUM_5;
+gpio_num_t led_red = GPIO_NUM_12;
+gpio_num_t led_green = GPIO_NUM_13;
+gpio_num_t led_blue = GPIO_NUM_15;
+
+#define GPIO_OUTPUT_PIN_MASK_TO_SET  ((1ULL<<led_yellow) | (1ULL<<led_red) | (1ULL<<led_green) | (1ULL<<led_blue) )
 // Definicion de la cola (NO inicializar aqui!)
 QueueHandle_t connectionInfoQueue;
 char payload[300];
@@ -15,19 +20,19 @@ char payload[300];
 void tcp_client_task(void *pvParameters)
 {
 //    char rx_buffer[128];
-    char addr_str[128];
-    int addr_family;
-    int ip_protocol;
+    char addr_str[128]; // Buffer para almacenar la direccion IP del servidor
+    int addr_family; // Variable para almacenar la familia de direcciones (IPv4 o IPv6)
+    int ip_protocol; // Variable para almacenar el protocolo de IP
     connectionInfo connectionData; // Variable para la estructura
-    connectionData.socketNumber= -1;
-    connectionData.ackConnect = 0;
+    connectionData.socketNumber= -1; // Inicializa el socketNumber en -1 para indicar que no hay socket
+    connectionData.ackConnect = 0; // Inicializa ackConnect en 0 para indicar que no hay conexion
 	int err =0;
     uint32_t counter = 0;
     time_t now;
     struct tm timeinfo;
    	char fecha[] = "15-01-2025";
 	char hora[] = "10:10:00";
-	int cnt = 0;
+	int cnt = 0; //Creo esta al pepe, podria usar counter.
 
     #ifdef CONFIG_EXAMPLE_IPV4
 		struct sockaddr_in destAddr;
@@ -65,9 +70,9 @@ void tcp_client_task(void *pvParameters)
 	// Obtener el tiempo actual
 	time(&now);
 	localtime_r(&now, &timeinfo);
-	// Calcular cu�ntos segundos faltan para el proximo intervalo
+	// Calcular cuantos segundos faltan para el proximo intervalo
 	int seconds_until_next_interval = TRANSMISSION_INTERVAL - (timeinfo.tm_sec % TRANSMISSION_INTERVAL);
-	// Esperar hasta el proximo intervalo
+	// Esperar hasta el proximo intervalo para la primera transmision de datos.
 	ESP_LOGI(TAG, "Esperando %d segundos para comenzar en el proximo intervalo...", seconds_until_next_interval);
 	vTaskDelay(seconds_until_next_interval * 1000 / portTICK_PERIOD_MS);
 
@@ -158,10 +163,10 @@ void tcp_client_task(void *pvParameters)
 		seconds_until_next_interval = TRANSMISSION_INTERVAL - (timeinfo.tm_sec % TRANSMISSION_INTERVAL);
 
 		ESP_LOGI(TAG, "cnt: %d\n", cnt++);
-		gpio_set_level(GPIO_OUTPUT_LED_1, cnt % 2);
-		gpio_set_level(GPIO_OUTPUT_LED_2, cnt % 2);
-		gpio_set_level(GPIO_OUTPUT_LED_3, cnt % 2);
-		gpio_set_level(GPIO_OUTPUT_LED_4, cnt % 2);
+		gpio_set_level(led_yellow, cnt % 2);
+		gpio_set_level(led_red, cnt % 2);
+		gpio_set_level(led_green, cnt % 2);
+		// gpio_set_level(led_blue, cnt % 2);
         vTaskDelay(seconds_until_next_interval*1000 / portTICK_PERIOD_MS);
     }
 //    vTaskDelete(NULL);

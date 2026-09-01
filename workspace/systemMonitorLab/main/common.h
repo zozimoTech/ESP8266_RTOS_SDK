@@ -21,7 +21,7 @@
 #define I2C_EXAMPLE_MASTER_TX_BUF_DISABLE   0                /*!< I2C master do not need buffer */
 #define I2C_EXAMPLE_MASTER_RX_BUF_DISABLE   0                /*!< I2C master do not need buffer */
 #define SAMPLE_RATE_SENSORS  				10				/*In Seconds*/
-#define TRANSMISSION_INTERVAL  				60				/*In Seconds*/
+#define TRANSMISSION_INTERVAL  				180				/*In Seconds*/
 #define NUMERO_DE_NODO						0               /* Node sensor number */
 #define LOW_LEVEL							0
 #define HIGH_LEVEL							1

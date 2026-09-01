@@ -1,0 +1,41 @@
+{
+    "version": 4,
+    "configurations": [
+        {
+            "name": "ESP8266 RTOS SDK - systemMonitorLab",
+            "compilerPath": "/home/caranda/esp/xtensa-lx106-elf/bin/xtensa-lx106-elf-gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++14",
+            "includePath": [
+                "${workspaceFolder}/workspace/systemMonitorLab/main",
+                "${workspaceFolder}/workspace/systemMonitorLab/build/include",
+                "${workspaceFolder}/components/esp8266/include",
+                "${workspaceFolder}/components/esp_common/include",
+                "${workspaceFolder}/components/freertos/include",
+                "${workspaceFolder}/components/freertos/port/esp8266/include",
+                "${workspaceFolder}/components/heap/include",
+                "${workspaceFolder}/components/heap/port/esp8266/include",
+                "${workspaceFolder}/components/log/include",
+                "${workspaceFolder}/components/lwip/include",
+                "${workspaceFolder}/components/lwip/lwip/src/include",
+                "${workspaceFolder}/components/lwip/port/esp8266/include",
+                "${workspaceFolder}/components/newlib/platform_include",
+                "${workspaceFolder}/components/vfs/include",
+                "${workspaceFolder}/components/tcpip_adapter/include",
+                "${workspaceFolder}/components/esp_event/include",
+                "${workspaceFolder}/components/nvs_flash/include",
+                "${workspaceFolder}/components/spi_flash/include",
+                "${workspaceFolder}/examples/common_components/protocol_examples_common/include",
+                "${workspaceFolder}/components/freertos/port/esp8266/include/freertos",
+                "${workspaceFolder}/components/freertos/include/freertos/private",
+                "${workspaceFolder}/components/lwip/include/apps/sntp",
+                "${workspaceFolder}/components/lwip/include/apps",
+                "${workspaceFolder}/components/freertos/include/freertos"
+            ],
+            "defines": [
+                "ESP_PLATFORM",
+                "__XTENSA__"
+            ]
+        }
+    ]
+}

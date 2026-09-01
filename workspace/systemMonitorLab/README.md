@@ -39,6 +39,85 @@ Los datos de los sensores se envían en un payload JSON con el siguiente formato
 *   Sensor AHT10.
 *   Sensor BMP280.
 
+## Configurar VS Code e IntelliSense
+
+Para que VS Code pueda resolver las cabeceras, funciones, tipos y registros del
+ESP8266 RTOS SDK, instale la extensión **C/C++** de Microsoft y cree la carpeta
+`.vscode` en la raíz de este proyecto:
+
+```text
+systemMonitorLab/
+├── main/
+├── Makefile
+├── sdkconfig
+└── .vscode/
+    ├── c_cpp_properties.json
+    └── settings.json
+```
+
+En la terminal, defina las rutas del SDK y del compilador. Agregue estas líneas
+a `~/.bashrc` y adapte las rutas si instaló las herramientas en otro lugar:
+
+```bash
+export IDF_PATH="${HOME}/esp/ESP8266_RTOS_SDK"
+export ESP8266_TOOLCHAIN="${HOME}/esp/xtensa-lx106-elf"
+export PATH="${ESP8266_TOOLCHAIN}/bin:${PATH}"
+```
+
+Abra una terminal nueva y ejecute `code .` desde la raíz de `systemMonitorLab`.
+De este modo VS Code recibe las variables de entorno anteriores.
+
+Contenido de `.vscode/settings.json`:
+
+```json
+{
+  "C_Cpp.intelliSenseEngine": "default",
+  "C_Cpp.default.compilerPath": "${env:ESP8266_TOOLCHAIN}/bin/xtensa-lx106-elf-gcc"
+}
+```
+
+Contenido de `.vscode/c_cpp_properties.json`:
+
+```json
+{
+  "version": 4,
+  "configurations": [
+    {
+      "name": "ESP8266 RTOS SDK",
+      "compilerPath": "${env:ESP8266_TOOLCHAIN}/bin/xtensa-lx106-elf-gcc",
+      "cStandard": "c11",
+      "cppStandard": "c++14",
+      "includePath": [
+        "${workspaceFolder}/main",
+        "${workspaceFolder}/build/include",
+        "${env:IDF_PATH}/components/esp8266/include",
+        "${env:IDF_PATH}/components/esp_common/include",
+        "${env:IDF_PATH}/components/freertos/include",
+        "${env:IDF_PATH}/components/freertos/port/esp8266/include",
+        "${env:IDF_PATH}/components/heap/include",
+        "${env:IDF_PATH}/components/heap/port/esp8266/include",
+        "${env:IDF_PATH}/components/log/include",
+        "${env:IDF_PATH}/components/lwip/include",
+        "${env:IDF_PATH}/components/lwip/lwip/src/include",
+        "${env:IDF_PATH}/components/lwip/port/esp8266/include",
+        "${env:IDF_PATH}/components/newlib/platform_include",
+        "${env:IDF_PATH}/components/vfs/include",
+        "${env:IDF_PATH}/components/tcpip_adapter/include",
+        "${env:IDF_PATH}/components/esp_event/include",
+        "${env:IDF_PATH}/components/nvs_flash/include",
+        "${env:IDF_PATH}/components/spi_flash/include"
+      ],
+      "defines": ["ESP_PLATFORM", "__XTENSA__"]
+    }
+  ]
+}
+```
+
+Luego recargue VS Code con `Ctrl+Shift+P` y el comando
+`Developer: Reload Window`. Ahora `F12` o `Ctrl+clic` sobre una función,
+estructura, macro o variable debería llevar a su declaración. Para usar un
+componente adicional, agregue su carpeta `include` a `includePath`.
+
 ## Configure the project
 
 ```
