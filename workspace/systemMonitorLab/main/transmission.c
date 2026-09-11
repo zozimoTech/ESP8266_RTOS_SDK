@@ -101,7 +101,7 @@ void tcp_client_task(void *pvParameters)
 //					continue;
 				}else{
 					ESP_LOGI(TAG, "Successfully connected");
-					connectionData.ackConnect = 1;
+					connectionData.ackConnect = 1; // Actualiza el estado de la conexión a conectado
 					xQueueSend(connectionInfoQueue,&connectionData, 0); // Envia el estado a la cola
 					// char host[] = "10.10.13.138";
 					char host[] = "sc-web.local";
@@ -132,44 +132,63 @@ void tcp_client_task(void *pvParameters)
 					break;
 				}
 			}
+    	}if(connectionData.ackConnect == 1)
+		{
+			ESP_LOGI(TAG, "Numero de Socket %d", connectionData.socketNumber);
+
+	//		Formato de mensaje
+	//		M;numNodo;numMed;fecha;hora;temperature;humidity;pressure;
+	//		Ejemplo
+	//		M;0;0;15-01-2025;10:10:00;30.23;40.24;1000.23;
+	//		Obtengo la hora y la fecha
+			time(&now);
+			localtime_r(&now, &timeinfo);
+	//		strftime(strftime_buf, sizeof(strftime_buf), "%c", &timeinfo);
+			strftime(hora, sizeof(hora), "%H:%M:%S", &timeinfo);
+			strftime(fecha, sizeof(fecha), "%d-%m-%Y", &timeinfo);
+			sprintf(payload,"------------Datos:\"M;%d;%d;%s;%s;%s;%s;%s;%s;",NUMERO_DE_NODO,counter,fecha,hora,temp_string_dht22,temp_string_bmp280,rh_string_dht22,pressure_string_bmp280);
+			ESP_LOGI(TAG,payload);
+			sprintf(payload,"{\"message\":\"M;%d;%d;%s;%s;%s;%s;%s;%s;\"}",NUMERO_DE_NODO,counter,fecha,hora,temp_string_dht22,temp_string_bmp280,rh_string_dht22,pressure_string_bmp280);
+
+			if(opTransmitMeasuareWebSocket(payload, &connectionData )==OK){
+				ESP_LOGI(TAG, "Pude enviar sin problemas las mediciones");
+	//    		ESP_LOGI(TAG, "----------------------The current date/time in Buenos Aires is: %s", strftime_buf);
+
+			}else{
+				ESP_LOGI(TAG, "No se pudo enviar las mediciones");
+			}
+			counter = counter + 1;
+			// Esperar hasta el pr�ximo intervalo
+			// time(&now);
+			// localtime_r(&now, &timeinfo);
+			// seconds_until_next_interval = TRANSMISSION_INTERVAL - (timeinfo.tm_sec % TRANSMISSION_INTERVAL);
+			// ESP_LOGI(TAG, "Segundero %d ", timeinfo.tm_sec );
+			// ESP_LOGI(TAG, "Esperando %d segundos para la prxima transmisión...", seconds_until_next_interval);
+			
+			time(&now);
+			localtime_r(&now, &timeinfo);
+			
+			// // Calcular cuantos segundos faltan para el proximo intervalo de transmision
+			int seconds_in_hour = timeinfo.tm_min * 60 + timeinfo.tm_sec; // Segundos transcurridos en la hora actual
+			int remainder = seconds_in_hour % TRANSMISSION_INTERVAL; // Segundos transcurridos desde el último intervalo de transmisión
+			int seconds_until_next_interval = TRANSMISSION_INTERVAL - remainder; // Segundos restantes hasta el próximo intervalo de transmisión
+			ESP_LOGI(TAG, "Segundos transcurridos en la hora actual: %d", seconds_in_hour);
+			ESP_LOGI(TAG, "Segundos transcurridos desde el ultimo intervalo de transmision: %d", remainder);
+			ESP_LOGI(TAG, "Segundos hasta el proximo intervalo de transmision: %d", seconds_until_next_interval);
+
+			// Metodo mas simple y directo para calcular los segundos hasta el proximo intervalo de transmision
+			// int seconds_until_next_interval = TRANSMISSION_INTERVAL - (timeinfo.tm_sec % TRANSMISSION_INTERVAL);
+			// ESP_LOGI(TAG, "Segundos hasta el proximo intervalo de transmision: %d", seconds_until_next_interval);
+
+			ESP_LOGI(TAG, "cnt: %d\n", cnt++);
+			gpio_set_level(led_yellow, cnt % 2);
+			gpio_set_level(led_red, cnt % 2);
+			gpio_set_level(led_green, cnt % 2);
+			// gpio_set_level(led_blue, cnt % 2);
+			vTaskDelay(seconds_until_next_interval * 1000 / portTICK_PERIOD_MS);
     	}
-		ESP_LOGI(TAG, "Numero de Socket %d", connectionData.socketNumber);
-
-//		Formato de mensaje
-//		M;numNodo;numMed;fecha;hora;temperature;humidity;pressure;
-//		Ejemplo
-//		M;0;0;15-01-2025;10:10:00;30.23;40.24;1000.23;
-//		Obtengo la hora y la fecha
-		time(&now);
-		localtime_r(&now, &timeinfo);
-//		strftime(strftime_buf, sizeof(strftime_buf), "%c", &timeinfo);
-		strftime(hora, sizeof(hora), "%H:%M:%S", &timeinfo);
-		strftime(fecha, sizeof(fecha), "%d-%m-%Y", &timeinfo);
-		sprintf(payload,"------------Datos:\"M;%d;%d;%s;%s;%s;%s;%s;%s;",NUMERO_DE_NODO,counter,fecha,hora,temp_string_dht22,temp_string_bmp280,rh_string_dht22,pressure_string_bmp280);
-		ESP_LOGI(TAG,payload);
-    	sprintf(payload,"{\"message\":\"M;%d;%d;%s;%s;%s;%s;%s;%s;\"}",NUMERO_DE_NODO,counter,fecha,hora,temp_string_dht22,temp_string_bmp280,rh_string_dht22,pressure_string_bmp280);
-
-    	if(opTransmitMeasuareWebSocket(payload, &connectionData )==OK){
-    		ESP_LOGI(TAG, "Pude enviar sin problemas las mediciones");
-//    		ESP_LOGI(TAG, "----------------------The current date/time in Buenos Aires is: %s", strftime_buf);
-
-    	}else{
-    		ESP_LOGI(TAG, "No se pudo enviar las mediciones");
-    	}
-		counter = counter + 1;
-		// Esperar hasta el pr�ximo intervalo
-		time(&now);
-		localtime_r(&now, &timeinfo);
-		seconds_until_next_interval = TRANSMISSION_INTERVAL - (timeinfo.tm_sec % TRANSMISSION_INTERVAL);
-
-		ESP_LOGI(TAG, "cnt: %d\n", cnt++);
-		gpio_set_level(led_yellow, cnt % 2);
-		gpio_set_level(led_red, cnt % 2);
-		gpio_set_level(led_green, cnt % 2);
-		// gpio_set_level(led_blue, cnt % 2);
-        vTaskDelay(seconds_until_next_interval*1000 / portTICK_PERIOD_MS);
-    }
 //    vTaskDelete(NULL);
+	}
 }
 
 bool opTransmitMeasuareWebSocket(char * tableData,connectionInfo * connectionData){
