@@ -2,22 +2,23 @@
 #include "lwip/apps/sntp.h"
 #include "driver/gpio.h"
 #include "configRTC.h"
+#include "system_state.h"
 
-	// #define GPIO_OUTPUT_LED_1    5
-	// #define GPIO_OUTPUT_LED_2    12
-	// #define GPIO_OUTPUT_LED_3    13
-	// #define GPIO_OUTPUT_LED_4    15
-gpio_num_t led_yellow = GPIO_NUM_5;
-gpio_num_t led_red = GPIO_NUM_12;
-gpio_num_t led_green = GPIO_NUM_13;
-gpio_num_t led_blue = GPIO_NUM_15;
-
-#define GPIO_OUTPUT_PIN_MASK_TO_SET  ((1ULL<<led_yellow) | (1ULL<<led_red) | (1ULL<<led_green) | (1ULL<<led_blue) )
+static const gpio_num_t led_yellow = GPIO_NUM_5;
 // Definicion de la cola (NO inicializar aqui!)
 QueueHandle_t connectionInfoQueue;
+QueueHandle_t keepAliveControlQueue;
 char payload[300];
 
-void tcp_client_task(void *pvParameters)
+static void publish_connection_state(const connectionInfo *connectionData)
+{
+	// Conserva el estado actual para que websocket_client_task pueda consultarlo.
+	xQueueOverwrite(connectionInfoQueue, connectionData);
+	// Publica el cambio para despertar o detener keep_alive_task.
+	xQueueOverwrite(keepAliveControlQueue, connectionData);
+}
+
+void websocket_client_task(void *pvParameters)
 {
 //    char rx_buffer[128];
     char addr_str[128]; // Buffer para almacenar la direccion IP del servidor
@@ -32,9 +33,8 @@ void tcp_client_task(void *pvParameters)
     struct tm timeinfo;
    	char fecha[] = "15-01-2025";
 	char hora[] = "10:10:00";
-	int cnt = 0; //Creo esta al pepe, podria usar counter.
 
-    #ifdef CONFIG_EXAMPLE_IPV4
+	#ifdef CONFIG_APP_SERVER_IPV4
 		struct sockaddr_in destAddr;
 		destAddr.sin_addr.s_addr = inet_addr(HOST_IP_ADDR);
 		destAddr.sin_family = AF_INET;
@@ -52,14 +52,14 @@ void tcp_client_task(void *pvParameters)
 		ip_protocol = IPPROTO_IPV6;
 		inet6_ntoa_r(destAddr.sin6_addr, addr_str, sizeof(addr_str) - 1);
     #endif
-	// Configurar los Leds de estado
+	// Configurar solamente el LED amarillo de actividad.
 	gpio_config_t io_conf;
 	//disable interrupt
 	io_conf.intr_type = GPIO_INTR_DISABLE;
 	//set as output mode
 	io_conf.mode = GPIO_MODE_OUTPUT;
-	//bit mask of the pins that you want to set,e.g.GPIO15/16
-	io_conf.pin_bit_mask = GPIO_OUTPUT_PIN_MASK_TO_SET;
+	// Los LED rojo y verde son controlados exclusivamente por PWM.
+	io_conf.pin_bit_mask = (1ULL << led_yellow);
 	//disable pull-down mode
 	io_conf.pull_down_en = 0;
 	//disable pull-up mode
@@ -71,7 +71,7 @@ void tcp_client_task(void *pvParameters)
 	time(&now);
 	localtime_r(&now, &timeinfo);
 	// Calcular cuantos segundos faltan para el proximo intervalo
-	int seconds_until_next_interval = TRANSMISSION_INTERVAL - (timeinfo.tm_sec % TRANSMISSION_INTERVAL);
+	int seconds_until_next_interval = CONFIG_APP_TRANSMISSION_RATE - (timeinfo.tm_sec % CONFIG_APP_TRANSMISSION_RATE);
 	// Esperar hasta el proximo intervalo para la primera transmision de datos.
 	ESP_LOGI(TAG, "Esperando %d segundos para comenzar en el proximo intervalo...", seconds_until_next_interval);
 	vTaskDelay(seconds_until_next_interval * 1000 / portTICK_PERIOD_MS);
@@ -79,9 +79,8 @@ void tcp_client_task(void *pvParameters)
 
     while (1) {
 
-//    	if (xQueueReceive(connectionInfoQueue, &connectionData, 0) != pdTRUE) {
-//    		connectionData.ackConnect = 0; // Si no hay mensaje en la cola, asume desconectado
-//        }
+	    // Lee el ultimo estado sin retirarlo de la cola, para que keep_alive_task tambien pueda verlo.
+	    xQueuePeek(connectionInfoQueue, &connectionData, 0);
     	if(connectionData.ackConnect != 1){
 
 //    		CAMBIAR DE COLOR LED DUAL EN FUNCION DEL ESTADO DE CONECTIVIDAD CON EL SERVIDOR WEB SOCKET
@@ -89,6 +88,7 @@ void tcp_client_task(void *pvParameters)
 				connectionData.socketNumber =  socket(addr_family, SOCK_STREAM, ip_protocol);
 				if (connectionData.socketNumber < 0) {
 					ESP_LOGE(TAG, "Unable to create socket: errno %d", errno);
+					system_state_publish(SYSTEM_STATE_WIFI_ONLY);
 					break;
 				}
 				ESP_LOGI(TAG, "-------------------------------------------------------------Socket created");
@@ -96,13 +96,14 @@ void tcp_client_task(void *pvParameters)
 				if (err != 0) {
 					ESP_LOGE(TAG, "Socket unable to connect: errno %d", errno);
 					connectionData.ackConnect = 0;
-					xQueueSend(connectionInfoQueue, &connectionData, 0); // Envia el estado a la cola
+					system_state_publish(SYSTEM_STATE_WIFI_ONLY);
+					// Reemplaza el estado anterior para conservar la desconexion mas reciente.
+					publish_connection_state(&connectionData);
 					close(connectionData.socketNumber);
 //					continue;
 				}else{
 					ESP_LOGI(TAG, "Successfully connected");
 					connectionData.ackConnect = 1; // Actualiza el estado de la conexión a conectado
-					xQueueSend(connectionInfoQueue,&connectionData, 0); // Envia el estado a la cola
 					// char host[] = "10.10.13.138";
 					char host[] = "sc-web.local";
 					// uint16_t server_port = 8000; //Se usa cuando aplicamos Debug run server
@@ -123,10 +124,15 @@ void tcp_client_task(void *pvParameters)
 					if (err < 0) {
 						ESP_LOGE(TAG, "Error occured during sending: errno %d", errno);
 						connectionData.ackConnect = 0; //Ponemos en cero el ack para que intente conectar otra vez
-						xQueueSend(connectionInfoQueue, &connectionData, 0); // Envia el estado a la cola
+						system_state_publish(SYSTEM_STATE_WIFI_ONLY);
+						// Reemplaza el estado anterior para ordenar una futura reconexion.
+						publish_connection_state(&connectionData);
 						break;
 					}else{
 						ESP_LOGI(TAG, "Envie correctamente el header de WEB SOCKET\r\n");
+						// Despierta el keep-alive solo cuando el handshake fue enviado correctamente.
+						publish_connection_state(&connectionData);
+						system_state_publish(SYSTEM_STATE_WEBSOCKET_CONNECTED);
 					}
 
 					break;
@@ -146,12 +152,19 @@ void tcp_client_task(void *pvParameters)
 	//		strftime(strftime_buf, sizeof(strftime_buf), "%c", &timeinfo);
 			strftime(hora, sizeof(hora), "%H:%M:%S", &timeinfo);
 			strftime(fecha, sizeof(fecha), "%d-%m-%Y", &timeinfo);
-			sprintf(payload,"------------Datos:\"M;%d;%d;%s;%s;%s;%s;%s;%s;",NUMERO_DE_NODO,counter,fecha,hora,temp_string_dht22,temp_string_bmp280,rh_string_dht22,pressure_string_bmp280);
+			sprintf(payload,"------------Datos:\"M;%d;%d;%s;%s;%s;%s;%s;%s;",CONFIG_APP_NUMBER_OF_NODE,counter,fecha,hora,temp_string_dht22,temp_string_bmp280,rh_string_dht22,pressure_string_bmp280);
 			ESP_LOGI(TAG,payload);
-			sprintf(payload,"{\"message\":\"M;%d;%d;%s;%s;%s;%s;%s;%s;\"}",NUMERO_DE_NODO,counter,fecha,hora,temp_string_dht22,temp_string_bmp280,rh_string_dht22,pressure_string_bmp280);
+			sprintf(payload,"{\"message\":\"M;%d;%d;%s;%s;%s;%s;%s;%s;\"}",CONFIG_APP_NUMBER_OF_NODE,counter,fecha,hora,temp_string_dht22,temp_string_bmp280,rh_string_dht22,pressure_string_bmp280);
 
 			if(opTransmitMeasuareWebSocket(payload, &connectionData )==OK){
 				ESP_LOGI(TAG, "Pude enviar sin problemas las mediciones");
+				/* Dos destellos indican que una medicion fue transmitida. */
+				for (int blink = 0; blink < 2; ++blink) {
+					gpio_set_level(led_yellow, 1);
+					vTaskDelay(100 / portTICK_PERIOD_MS);
+					gpio_set_level(led_yellow, 0);
+					vTaskDelay(100 / portTICK_PERIOD_MS);
+				}
 	//    		ESP_LOGI(TAG, "----------------------The current date/time in Buenos Aires is: %s", strftime_buf);
 
 			}else{
@@ -161,7 +174,7 @@ void tcp_client_task(void *pvParameters)
 			// Esperar hasta el pr�ximo intervalo
 			// time(&now);
 			// localtime_r(&now, &timeinfo);
-			// seconds_until_next_interval = TRANSMISSION_INTERVAL - (timeinfo.tm_sec % TRANSMISSION_INTERVAL);
+			// seconds_until_next_interval = CONFIG_APP_TRANSMISSION_RATE - (timeinfo.tm_sec % CONFIG_APP_TRANSMISSION_RATE);
 			// ESP_LOGI(TAG, "Segundero %d ", timeinfo.tm_sec );
 			// ESP_LOGI(TAG, "Esperando %d segundos para la prxima transmisión...", seconds_until_next_interval);
 			
@@ -170,21 +183,16 @@ void tcp_client_task(void *pvParameters)
 			
 			// // Calcular cuantos segundos faltan para el proximo intervalo de transmision
 			int seconds_in_hour = timeinfo.tm_min * 60 + timeinfo.tm_sec; // Segundos transcurridos en la hora actual
-			int remainder = seconds_in_hour % TRANSMISSION_INTERVAL; // Segundos transcurridos desde el último intervalo de transmisión
-			int seconds_until_next_interval = TRANSMISSION_INTERVAL - remainder; // Segundos restantes hasta el próximo intervalo de transmisión
+			int remainder = seconds_in_hour % CONFIG_APP_TRANSMISSION_RATE; // Segundos transcurridos desde el último intervalo de transmisión
+			int seconds_until_next_interval = CONFIG_APP_TRANSMISSION_RATE - remainder; // Segundos restantes hasta el próximo intervalo de transmisión
 			ESP_LOGI(TAG, "Segundos transcurridos en la hora actual: %d", seconds_in_hour);
 			ESP_LOGI(TAG, "Segundos transcurridos desde el ultimo intervalo de transmision: %d", remainder);
 			ESP_LOGI(TAG, "Segundos hasta el proximo intervalo de transmision: %d", seconds_until_next_interval);
 
 			// Metodo mas simple y directo para calcular los segundos hasta el proximo intervalo de transmision
-			// int seconds_until_next_interval = TRANSMISSION_INTERVAL - (timeinfo.tm_sec % TRANSMISSION_INTERVAL);
+			// int seconds_until_next_interval = CONFIG_APP_TRANSMISSION_RATE - (timeinfo.tm_sec % CONFIG_APP_TRANSMISSION_RATE);
 			// ESP_LOGI(TAG, "Segundos hasta el proximo intervalo de transmision: %d", seconds_until_next_interval);
 
-			ESP_LOGI(TAG, "cnt: %d\n", cnt++);
-			gpio_set_level(led_yellow, cnt % 2);
-			gpio_set_level(led_red, cnt % 2);
-			gpio_set_level(led_green, cnt % 2);
-			// gpio_set_level(led_blue, cnt % 2);
 			vTaskDelay(seconds_until_next_interval * 1000 / portTICK_PERIOD_MS);
     	}
 //    vTaskDelete(NULL);
@@ -203,6 +211,9 @@ bool opTransmitMeasuareWebSocket(char * tableData,connectionInfo * connectionDat
     	if (err < 0) {
 			ESP_LOGE(TAG, "Error occured during sending: errno %d", errno);
 			connectionData->ackConnect = 0;
+			// Publica el fallo para que websocket_client_task intente reconectar.
+			publish_connection_state(connectionData);
+			system_state_publish(SYSTEM_STATE_WIFI_ONLY);
 			return FAIL;
 		}
 
@@ -212,6 +223,9 @@ bool opTransmitMeasuareWebSocket(char * tableData,connectionInfo * connectionDat
     	if (err < 0) {
 			ESP_LOGE(TAG, "Error occured during sending: errno %d", errno);
 			connectionData->ackConnect = 0;
+			// Publica el fallo para que websocket_client_task intente reconectar.
+			publish_connection_state(connectionData);
+			system_state_publish(SYSTEM_STATE_WIFI_ONLY);
 			return FAIL;
 		}
 	}
@@ -222,13 +236,16 @@ bool opTransmitMeasuareWebSocket(char * tableData,connectionInfo * connectionDat
 
 // Implementaci�n de la tarea keep_alive_task (como en la respuesta anterior)
 void keep_alive_task(void *pvParameters) {
-    connectionInfo receivedData;
+	connectionInfo receivedData = {
+		.ackConnect = 0,
+		.socketNumber = -1
+	};
 	int err =0;
 
     while (1) {
-    	xQueueReceive(connectionInfoQueue, &receivedData, 0);
-//        if (xQueueReceive(connectionInfoQueue, &receivedData, 0) == pdTRUE) {
-		if (receivedData.ackConnect == 1) {
+		// Se bloquea hasta que websocket_client_task publique una conexion.
+		xQueueReceive(keepAliveControlQueue, &receivedData, portMAX_DELAY);
+		while (receivedData.ackConnect == 1) {
 			ESP_LOGI(TAG, "Keep Alive: Conexion activa, enviando mensaje de keep alive");
 			ESP_LOGI(TAG, "Estado de conexion: %d", receivedData.ackConnect);
 			ESP_LOGI(TAG, "Numero de Socket: %d", receivedData.socketNumber);
@@ -242,16 +259,17 @@ void keep_alive_task(void *pvParameters) {
 			if (err < 0) {
 				ESP_LOGE(TAG, "Error occured during sending: errno %d", errno);
 				receivedData.ackConnect = 0;
-				break;
+				// Publica el fallo para que websocket_client_task intente reconectar.
+				system_state_publish(SYSTEM_STATE_WIFI_ONLY);
+				publish_connection_state(&receivedData);
 			}
-			// ... (c�digo para enviar mensaje de keep-alive)
-		} else {
-			ESP_LOGI(TAG, "Keep Alive: Conexion inactiva");
-			ESP_LOGI(TAG, "Estado de conexion, dato de la cola: %d", receivedData.ackConnect);
-			// Realizar acciones necesarias si la conexi�n est� inactiva
+
+			// Espera un cambio de estado durante un segundo antes del siguiente keep-alive.
+			if (xQueueReceive(keepAliveControlQueue, &receivedData,
+					pdMS_TO_TICKS(10000)) != pdTRUE) {
+				receivedData.ackConnect = 1;
 		}
-//        }
-        vTaskDelay(1000 / portTICK_PERIOD_MS); // Ejemplo: revisa cada 5 segundos
+		}
     }
 }
 

@@ -13,7 +13,6 @@
 #include "esp_log.h"
 #include "esp_netif.h"
 #include "esp_event.h"
-#include "protocol_examples_common.h"
 #include "nvs.h"
 #include "nvs_flash.h"
 
@@ -27,13 +26,13 @@
 #include "common.h"
 #include "lwip/apps/sntp.h"
 
-#ifdef CONFIG_EXAMPLE_IPV4
-#define HOST_IP_ADDR CONFIG_EXAMPLE_IPV4_ADDR
+#ifdef CONFIG_APP_SERVER_IPV4
+#define HOST_IP_ADDR CONFIG_APP_SERVER_IPV4_ADDR
 #else
-#define HOST_IP_ADDR CONFIG_EXAMPLE_IPV6_ADDR
+#define HOST_IP_ADDR CONFIG_APP_SERVER_IPV6_ADDR
 #endif
 
-#define PORT CONFIG_EXAMPLE_PORT
+#define PORT CONFIG_APP_SERVER_PORT
 /*==================[macros]=================================================*/
 
 
@@ -57,12 +56,13 @@ typedef struct {
 //const char *payload2[300];
 // Declaraci�n externa de la cola
 extern QueueHandle_t connectionInfoQueue;
+extern QueueHandle_t keepAliveControlQueue;
 
 /*==================[external functions declaration]=========================*/
 extern void encodeMessage126(uint8_t * buf, uint8_t * message,size_t message_len);
 extern void encodeMessage125(uint8_t * buf, uint8_t * message,size_t message_len);
 extern bool opTransmitMeasuareWebSocket(char * tableData,connectionInfo * connectionData);
-extern void tcp_client_task(void *pvParameters);
+extern void websocket_client_task(void *pvParameters);
 extern void keep_alive_task(void *pvParameters);
 
 /*==================[end of file]============================================*/

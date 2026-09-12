@@ -1,38 +1,93 @@
-menu "Example Configuration"
+menu "System Monitor Configuration"
+config APP_NUMBER_OF_NODE
+    int "Node number"
+    range 0 255
+    default 0
+    help
+        Numero de nodo del dispositivo. Este valor se usara para identificar el nodo en el servidor WebSocket.
+config APP_WIFI_SSID
+    string "WiFi SSID"
+    default "mi_wifi"
+    help
+        Nombre de la red Wi-Fi a la que se conectara el dispositivo.
 
-choice EXAMPLE_IP_MODE
+config APP_WIFI_PASSWORD
+    string "WiFi password"
+    default "mi_password"
+    help
+        Contrasena de la red Wi-Fi. Dejela vacia para una red abierta.
+
+# Opciones propias de los LED de estado de la aplicación.
+config APP_STATUS_LED_ENABLE
+    bool "Enable status LEDs"
+    default y
+
+if APP_STATUS_LED_ENABLE
+
+# GPIO conectado al canal rojo del LED dual.
+config APP_LED_RED_GPIO
+    int "Red LED GPIO"
+    range 0 16
+    default 12
+
+# GPIO conectado al canal verde del LED dual.
+config APP_LED_GREEN_GPIO
+    int "Green LED GPIO"
+    range 0 16
+    default 13
+
+# Duty del canal verde usado junto con rojo para producir naranja.
+config APP_LED_ORANGE_GREEN_DUTY
+    int "Green PWM duty for orange (percent)"
+    range 0 100
+    default 40
+
+endif
+
+choice APP_SERVER_IP_MODE
     prompt "IP Version"
     help
-       Example can use either IPV4 or IPV6.
+    El cliente WebSocket puede usar IPv4 o IPv6.
 
-config EXAMPLE_IPV4
+config APP_SERVER_IPV4
     bool "IPV4"
 
-config EXAMPLE_IPV6
-   select EXAMPLE_CONNECT_IPV6
+config APP_SERVER_IPV6
    bool "IPV6"
 
 endchoice
 
-config EXAMPLE_IPV4_ADDR
+config APP_SERVER_IPV4_ADDR
     string "IPV4 Address"
     default "192.168.0.165"
-    depends on EXAMPLE_IPV4
+    depends on APP_SERVER_IPV4
     help
-       The example will connect to this IPV4 address.
+         Direccion IPv4 del servidor WebSocket.
 
-config EXAMPLE_IPV6_ADDR
+config APP_SERVER_IPV6_ADDR
     string "IPV6 Address"
     default "FE80::30AD:E57B:C212:68AD"
-    depends on EXAMPLE_IPV6
+    depends on APP_SERVER_IPV6
     help
-       The example will connect to this IPV6 address.
+         Direccion IPv6 del servidor WebSocket.
 
-config EXAMPLE_PORT
+config APP_SERVER_PORT
     int "Port"
     range 0 65535
     default 3333
     help
-        The remote port to which the client example will connect to.
+        Puerto remoto del servidor WebSocket.
 
+config APP_SAMPLE_RATE_SENSORS
+    int "Sample Rate"
+    range 1 43200
+    default 10
+    help
+        Tasa de muestreo de los sensores en segundos. El valor de sampling debe ser menor al tiempo de transmision de los datos al servidor WebSocket.
+config APP_TRANSMISSION_RATE
+    int "Transmission Rate"
+    range 1 86400
+    default 60
+    help
+        Tasa de transmision de los datos al servidor WebSocket en segundos. El valor de transmision debe ser mayor al tiempo de muestreo de los sensores.
 endmenu

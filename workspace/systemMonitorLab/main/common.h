@@ -12,6 +12,7 @@
 #include "driver/i2c.h"
 #include "semphr.h"
 #include "driver/gpio.h"
+#include "sdkconfig.h"
 
 
 #define MAX_PRECISION   (10)
@@ -20,9 +21,6 @@
 #define I2C_EXAMPLE_MASTER_NUM              I2C_NUM_0        /*!< I2C port number for master dev */
 #define I2C_EXAMPLE_MASTER_TX_BUF_DISABLE   0                /*!< I2C master do not need buffer */
 #define I2C_EXAMPLE_MASTER_RX_BUF_DISABLE   0                /*!< I2C master do not need buffer */
-#define SAMPLE_RATE_SENSORS  				10				/*In Seconds*/
-#define TRANSMISSION_INTERVAL  				60				/*In Seconds*/
-#define NUMERO_DE_NODO						0               /* Node sensor number */
 #define LOW_LEVEL							0
 #define HIGH_LEVEL							1
 

@@ -366,7 +366,7 @@ void bmp280_task(void *arg)
 				ESP_LOGE(TAG, "No ack, sensor not connected...skip...\n");
 			}
 			xSemaphoreGive(i2c_mutex);
-			vTaskDelay(1000*SAMPLE_RATE_SENSORS / portTICK_RATE_MS);
+			vTaskDelay(1000*CONFIG_APP_SAMPLE_RATE_SENSORS / portTICK_RATE_MS);
     	}
 
     }

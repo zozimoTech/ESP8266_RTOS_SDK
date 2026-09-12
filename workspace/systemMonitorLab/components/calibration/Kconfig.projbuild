@@ -1,0 +1,45 @@
+menu "Calibration Parameters"
+
+config APP_CALIBRATION_PRESSURE_OFFSET
+    string "Pressure offset"
+    default "0.0"
+    help
+        Offset de calibracion de presion para la funcion lineal.
+        Puede utilizar valores decimales.
+
+config APP_CALIBRATION_PRESSURE_SLOPE
+    string "Pressure slope"
+    default "1.0"
+    help
+        Pendiente de calibracion de presion para la funcion lineal.
+        Puede utilizar valores decimales.
+
+config APP_CALIBRATION_TEMPERATURE_OFFSET
+    string "Temperature offset"
+    default "0.0"
+    help
+        Offset de calibracion de temperatura para la funcion lineal.
+        Puede utilizar valores decimales.
+
+config APP_CALIBRATION_TEMPERATURE_SLOPE
+    string "Temperature slope"
+    default "1.0"
+    help
+        Pendiente de calibracion de temperatura para la funcion lineal.
+        Puede utilizar valores decimales.
+
+config APP_CALIBRATION_HUMIDITY_OFFSET
+    string "Humidity offset"
+    default "0.0"
+    help
+        Offset de calibracion de humedad para la funcion lineal.
+        Puede utilizar valores decimales.
+
+config APP_CALIBRATION_HUMIDITY_SLOPE
+    string "Humidity slope"
+    default "1.0"
+    help
+        Pendiente de calibracion de humedad para la funcion lineal.
+        Puede utilizar valores decimales.
+
+endmenu
