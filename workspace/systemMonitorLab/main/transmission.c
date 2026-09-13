@@ -68,13 +68,13 @@ void websocket_client_task(void *pvParameters)
 	gpio_config(&io_conf);
 
 	// Obtener el tiempo actual
-	time(&now);
-	localtime_r(&now, &timeinfo);
-	// Calcular cuantos segundos faltan para el proximo intervalo
-	int seconds_until_next_interval = CONFIG_APP_TRANSMISSION_RATE - (timeinfo.tm_sec % CONFIG_APP_TRANSMISSION_RATE);
-	// Esperar hasta el proximo intervalo para la primera transmision de datos.
-	ESP_LOGI(TAG, "Esperando %d segundos para comenzar en el proximo intervalo...", seconds_until_next_interval);
-	vTaskDelay(seconds_until_next_interval * 1000 / portTICK_PERIOD_MS);
+	// time(&now);
+	// localtime_r(&now, &timeinfo);
+	// // Calcular cuantos segundos faltan para el proximo intervalo
+	// int seconds_until_next_interval = CONFIG_APP_TRANSMISSION_RATE - (timeinfo.tm_sec % CONFIG_APP_TRANSMISSION_RATE);
+	// // Esperar hasta el proximo intervalo para la primera transmision de datos.
+	// ESP_LOGI(TAG, "Esperando %d segundos para comenzar en el proximo intervalo...", seconds_until_next_interval);
+	// vTaskDelay(seconds_until_next_interval * 1000 / portTICK_PERIOD_MS);
 
 
     while (1) {
@@ -127,6 +127,7 @@ void websocket_client_task(void *pvParameters)
 						system_state_publish(SYSTEM_STATE_WIFI_ONLY);
 						// Reemplaza el estado anterior para ordenar una futura reconexion.
 						publish_connection_state(&connectionData);
+						close(connectionData.socketNumber);
 						break;
 					}else{
 						ESP_LOGI(TAG, "Envie correctamente el header de WEB SOCKET\r\n");
@@ -214,6 +215,7 @@ bool opTransmitMeasuareWebSocket(char * tableData,connectionInfo * connectionDat
 			// Publica el fallo para que websocket_client_task intente reconectar.
 			publish_connection_state(connectionData);
 			system_state_publish(SYSTEM_STATE_WIFI_ONLY);
+			close(connectionData->socketNumber);
 			return FAIL;
 		}
 
@@ -226,6 +228,7 @@ bool opTransmitMeasuareWebSocket(char * tableData,connectionInfo * connectionDat
 			// Publica el fallo para que websocket_client_task intente reconectar.
 			publish_connection_state(connectionData);
 			system_state_publish(SYSTEM_STATE_WIFI_ONLY);
+			close(connectionData->socketNumber);
 			return FAIL;
 		}
 	}
@@ -261,12 +264,13 @@ void keep_alive_task(void *pvParameters) {
 				receivedData.ackConnect = 0;
 				// Publica el fallo para que websocket_client_task intente reconectar.
 				system_state_publish(SYSTEM_STATE_WIFI_ONLY);
+				close(receivedData.socketNumber);
 				publish_connection_state(&receivedData);
 			}
 
 			// Espera un cambio de estado durante un segundo antes del siguiente keep-alive.
 			if (xQueueReceive(keepAliveControlQueue, &receivedData,
-					pdMS_TO_TICKS(10000)) != pdTRUE) {
+					pdMS_TO_TICKS(5000)) != pdTRUE) {
 				receivedData.ackConnect = 1;
 		}
 		}
